@@ -9,6 +9,8 @@ export default function Board() {
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [activeCard, setActiveCard] = useState(null);
+
 
   const auth = getAuth();
 
@@ -34,6 +36,14 @@ export default function Board() {
     fetchPosts();
   };
 
+  const handleCardClick = (postId) => {
+  setActiveCard((prev) => (prev === postId ? null : postId));
+  };
+
+  const handleLinkClick = (link) => {
+    window.open(link, '_blank');
+  };
+
   return (
     <div style={{ margin: 'auto', width: '100%' }}>
 
@@ -42,22 +52,21 @@ export default function Board() {
         {posts
           .filter((post) => post.section === 1)
           .map((post) => (
-            <div key={post.id} className='card'>
+            <div key={post.id} className={`card ${activeCard === post.id ? 'active' : ''}`} 
+              onClick={() => handleCardClick(post.id)}>
 
               <img src={post.imageUrl} alt="" className='cardImg' />
+              
+              <div className='cardInfoWrapper'>
               <p className='cardDisc'>{post.description}</p>
+              <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
+              </div>
 
               {isAdmin && (
-                <div className="flex gap-2 mt-2">
-                  <button
-                    onClick={() => setSelectedPost(post)}
-                    className="bg-yellow-500 text-white px-2 py-1 rounded"
-                  >
-                    Edit
-                  </button>
+                <div className="buttonContainer">
                   <button
                     onClick={() => handleDelete(post.id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
+                    className="cardDelete"
                   >
                     Delete
                   </button>
@@ -79,22 +88,19 @@ export default function Board() {
         {posts
           .filter((post) => post.section === 2)
           .map((post) => (
-            <div key={post.id} className='card'>
+            <div key={post.id} className={`card ${activeCard === post.id ? 'active' : ''}`} onClick={() => handleCardClick(post.id)}>
 
               <img src={post.imageUrl} alt="" className='cardImg' />
+              <div className='cardInfoWrapper'>
               <p className='cardDisc'>{post.description}</p>
+              <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
+              </div>
 
               {isAdmin && (
-                <div className="flex gap-2 mt-2">
-                  <button
-                    onClick={() => setSelectedPost(post)}
-                    className="bg-yellow-500 text-white px-2 py-1 rounded"
-                  >
-                    Edit
-                  </button>
+                <div className="buttonContainer">
                   <button
                     onClick={() => handleDelete(post.id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
+                    className="cardDelete"
                   >
                     Delete
                   </button>
@@ -119,22 +125,19 @@ export default function Board() {
         {posts
           .filter((post) => post.section === 3)
           .map((post) => (
-            <div key={post.id} className='card'>
+            <div key={post.id} className={`card ${activeCard === post.id ? 'active' : ''}`} onClick={() => handleCardClick(post.id)}>
 
               <img src={post.imageUrl} alt="" className='cardImg' />
+              <div className='cardInfoWrapper'>
               <p className='cardDisc'>{post.description}</p>
+              <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
+              </div>
 
               {isAdmin && (
-                <div className="flex gap-2 mt-2">
-                  <button
-                    onClick={() => setSelectedPost(post)}
-                    className="bg-yellow-500 text-white px-2 py-1 rounded"
-                  >
-                    Edit
-                  </button>
+                <div className="buttonContainer">
                   <button
                     onClick={() => handleDelete(post.id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
+                    className="cardDelete"
                   >
                     Delete
                   </button>

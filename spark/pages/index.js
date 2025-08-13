@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 import { app } from '../firebase/firebaseClient';
 
@@ -11,6 +11,8 @@ export default function Home() {
   const [editing, setEditing] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [detailsView, setDetailsView] = useState(false);
+
 
   useEffect(() => {
     return onAuthStateChanged(auth, (user) => {
@@ -28,11 +30,27 @@ export default function Home() {
     signOut(auth);
   };
 
+  const toggleDetails = () => {
+    setDetailsView(!detailsView);
+    document.querySelectorAll('.cardInfoWrapper')
+    .forEach(element => {
+    element.style.display = detailsView ? 'none' : 'flex';
+    });
+
+    document.querySelectorAll('.card')
+    .forEach(element => {
+      element.style.height = detailsView ? '20vh' : '25vh';
+    });
+  }
+
+  
+
   return (
     <div style={{ padding: 24, maxWidth: 1100, margin: '0 auto' }}>
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
         <h1 style={{color: '#eee'}}>Price Calculator</h1>
         <div style={{ display: 'flex', gap: 8 }}>
+          <button onClick={() => toggleDetails()}>Show/Hide Details</button>
           {!isAdmin && (
             <button onClick={handleLogin}>Admin Login</button>
           )}
