@@ -20,15 +20,18 @@ body{
     border: .5px solid #eee;
     padding: 1.5vh;
     /* border-radius: 8px; */
-    margin: 1vh;
-    height: 20vh;
+    margin: 3vh;
+    height: 25vh;
+    width: 25vh;
     transition: all 0.2s ease-in-out;
     margin: auto 1vw;
+    overflow-y: hidden;
+    overflow: visible;
 }
 
 .cardImg{
-    height: 20vh;
-    width: 20vh;
+    height: 25vh;
+    width: 25vh;
     object-fit: cover;
     border-radius: 8px;
 }
@@ -41,8 +44,7 @@ body{
 
 .addCard {
     border: .5px solid #eee;
-    padding: 16px;
-    margin: 1vh;
+    padding: 0px 5px;
     display: flex;
     flex-direction: column;
     width: 15vw;
@@ -59,7 +61,7 @@ body{
     border: 1px solid #eee;
     padding: 8px;
     border-radius: 4px;
-    margin-bottom: 16px;
+    margin: 6px 5px;
     background-color: #2C2C2C;
     color: #fff;
 }
@@ -68,6 +70,7 @@ body{
     background-color: #3995E6;
     color: #fff;
     padding: 8px 16px;
+    margin-top: 10px;;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -128,4 +131,34 @@ body{
 
 .linkButton:hover {
     background-color: #2a7bbf;
+}
+
+.toggleDetailsButton{
+    background-color: #2C2C2C;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.adminLoginButton{
+    background-color: #1E1E1E;
+    color: #fff;
+    padding: 8px 16px;
+    border: 1px solid #3995E6;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.adminLogoutButton{
+    background-color: #ff4d4d;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
 }

@@ -70,19 +70,19 @@ export default function PostForm({ existing, onSave }) {
         onChange={(e) => setImageUrl(e.target.value)}
         className="inputBox"
       />
-      <textarea
+      <input
         placeholder="Price"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         className="inputBox"
       />
-      <textarea
+      <input
         placeholder="Link to Item"
         value={link}
         onChange={(e) => setLink(e.target.value)}
         className="inputBox"
       />
-      <textarea
+      <input
         placeholder="Section (1, 2, or 3)"
         value={section}
         onChange={(e) => setSection(e.target.value)}

@@ -37,9 +37,9 @@ export default function Home() {
     element.style.display = detailsView ? 'none' : 'flex';
     });
 
-    document.querySelectorAll('.card')
+    document.querySelectorAll('.cardImg')
     .forEach(element => {
-      element.style.height = detailsView ? '20vh' : '25vh';
+      element.style.height = detailsView ? '25vh' : '20vh';
     });
   }
 
@@ -50,13 +50,13 @@ export default function Home() {
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
         <h1 style={{color: '#eee'}}>Price Calculator</h1>
         <div style={{ display: 'flex', gap: 8 }}>
-          <button onClick={() => toggleDetails()}>Show/Hide Details</button>
+          <button className="toggleDetailsButton" onClick={() => toggleDetails()}>Show/Hide Details</button>
           {!isAdmin && (
-            <button onClick={handleLogin}>Admin Login</button>
+            <button className="adminLoginButton" onClick={handleLogin}>Login To Edit</button>
           )}
           {isAdmin && (
             <>
-              <button onClick={handleLogout}>Logout</button>
+              <button className="adminLogoutButton" onClick={handleLogout}>Logout</button>
             </>
           )}
         </div>
