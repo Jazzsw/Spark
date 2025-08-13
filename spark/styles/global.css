@@ -5,11 +5,16 @@ body{
     background-color: #1E1E1E;
 }
 
+.boardContainer{
+    
+    border-radius: 8px;
+}
+
 .section {
-  border: 1px solid #eee;
+  /* border: 1px solid #eee; */
   border-radius: 8px;
   display: flex;
-  padding: 1vw;
+  /* padding: 1vw; */
   overflow-x: scroll;
   width: 95%;
   height: 30vh;
@@ -161,4 +166,29 @@ body{
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+}
+
+.sectionTitle {
+    color: #eee;
+    font-size: 1.5vw;
+    margin: 1vw;
+}
+
+.totalContainer{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin: 1vw;
+    justify-self: flex-end; 
+}
+
+.totalTitle{
+    color: #eee;
+    font-size: 1.5vw;
+    margin-right: 1vw;
+}
+
+.totalPrice{
+    color: #eee;
+    font-size: 2.5vw;
 }

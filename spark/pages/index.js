@@ -47,27 +47,27 @@ export default function Home() {
 
   return (
     <div style={{ padding: 24, maxWidth: 1100, margin: '0 auto' }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-        <h1 style={{color: '#eee'}}>Price Calculator</h1>
+      <header style={{ display: 'flex', justifyContent: 'end', alignItems: 'center', marginBottom: 24 }}>
+        {/* <h1 style={{color: '#eee'}}>Price Calculator</h1> */}
         <div style={{ display: 'flex', gap: 8 }}>
           <button className="toggleDetailsButton" onClick={() => toggleDetails()}>Show/Hide Details</button>
-          {!isAdmin && (
+         
+         {!isAdmin && (
             <button className="adminLoginButton" onClick={handleLogin}>Login To Edit</button>
           )}
+
           {isAdmin && (
             <>
               <button className="adminLogoutButton" onClick={handleLogout}>Logout</button>
             </>
           )}
+
         </div>
       </header>
 
       {showForm && isAdmin && (
         <div style={{ marginBottom: 24 }}>
-          <PostForm
-            existing={editing}
-            onDone={() => { setShowForm(false); setEditing(null); }}
-          />
+          <PostForm existing={editing} onDone={() => { setShowForm(false); setEditing(null); }} />
         </div>
       )}
 
@@ -78,6 +78,7 @@ export default function Home() {
           setShowForm(true);
         }}
       />
+
     </div>
   );
 }

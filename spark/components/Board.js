@@ -9,7 +9,8 @@ export default function Board() {
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [activeCard, setActiveCard] = useState(null);
+  const [activeCards, setActiveCards] = useState({});
+
 
 
   const auth = getAuth();
@@ -36,30 +37,34 @@ export default function Board() {
     fetchPosts();
   };
 
-  const handleCardClick = (postId) => {
-  setActiveCard((prev) => (prev === postId ? null : postId));
+  const handleCardClick = (section, postId) => {
+    setActiveCards((prev) => ({
+      ...prev,
+      [section]: prev[section] === postId ? null : postId
+    }));
   };
+
 
   const handleLinkClick = (link) => {
     window.open(link, '_blank');
   };
 
   return (
-    <div style={{ margin: 'auto', width: '100%' }}>
+    <div className='boardContainer'>
 
-
+      <h2 className='sectionTitle'>Section 1</h2>
       <div className="section">
         {posts
           .filter((post) => post.section === 1)
           .map((post) => (
-            <div key={post.id} className={`card ${activeCard === post.id ? 'active' : ''}`} 
-              onClick={() => handleCardClick(post.id)}>
+            <div key={post.id} className={`card ${activeCards[1] === post.id ? 'active' : ''}`}
+              onClick={() => handleCardClick(1, post.id)}>
 
               <img src={post.imageUrl} alt="" className='cardImg' />
-              
+
               <div className='cardInfoWrapper'>
-              <p className='cardDisc'>{post.description}</p>
-              <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
+                <p className='cardDisc'>{post.description}</p>
+                <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
               </div>
 
               {isAdmin && (
@@ -84,16 +89,18 @@ export default function Board() {
         )}
       </div>
 
+      <h2 className='sectionTitle'>Section 2</h2>
       <div className="section">
         {posts
           .filter((post) => post.section === 2)
           .map((post) => (
-            <div key={post.id} className={`card ${activeCard === post.id ? 'active' : ''}`} onClick={() => handleCardClick(post.id)}>
+            <div key={post.id} className={`card ${activeCards[2] === post.id ? 'active' : ''}`}
+              onClick={() => handleCardClick(2, post.id)}>
 
               <img src={post.imageUrl} alt="" className='cardImg' />
               <div className='cardInfoWrapper'>
-              <p className='cardDisc'>{post.description}</p>
-              <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
+                <p className='cardDisc'>{post.description}</p>
+                <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
               </div>
 
               {isAdmin && (
@@ -120,17 +127,17 @@ export default function Board() {
         )}
       </div>
 
-
+      <h2 className='sectionTitle'>Section 3</h2>
       <div className="section">
         {posts
           .filter((post) => post.section === 3)
           .map((post) => (
-            <div key={post.id} className={`card ${activeCard === post.id ? 'active' : ''}`} onClick={() => handleCardClick(post.id)}>
+            <div key={post.id} className={`card ${activeCards[3] === post.id ? 'active' : ''}`} onClick={() => handleCardClick(3, post.id)}>
 
               <img src={post.imageUrl} alt="" className='cardImg' />
               <div className='cardInfoWrapper'>
-              <p className='cardDisc'>{post.description}</p>
-              <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
+                <p className='cardDisc'>{post.description}</p>
+                <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
               </div>
 
               {isAdmin && (
@@ -153,6 +160,18 @@ export default function Board() {
               fetchPosts();
             }} />
         )}
+      </div>
+
+      <div>
+        <div className='totalContainer'>
+          <p className='totalTitle'>Total </p>
+          <h1 className='totalPrice'>$ {(
+              (parseFloat(posts.find(post => post.section === 1 && activeCards[1] === post.id)?.description) || 0) +
+              (parseFloat(posts.find(post => post.section === 2 && activeCards[2] === post.id)?.description) || 0) +
+              (parseFloat(posts.find(post => post.section === 3 && activeCards[3] === post.id)?.description) || 0)
+            ).toFixed(2)}
+          </h1>
+        </div>
       </div>
 
 
