@@ -1,7 +1,6 @@
-// components/itemCard.js
 import React from 'react';
 
-export default function itemCard({ item, onEdit }){
+export default function PostCard({ post, onEdit }) {
   return (
     <div style={{ width: 260, border: '1px solid #eee', borderRadius: 8, overflow: 'hidden' }}>
 

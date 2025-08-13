@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { app } from '../firebase/firebaseClient';
-// import '../styles/global.css'
+import '../styles/global.css'
 
 
 export default function MyApp({ Component, pageProps }) {

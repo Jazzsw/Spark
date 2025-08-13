@@ -35,38 +35,122 @@ export default function Board() {
   };
 
   return (
-    <div style={{margin: 'auto', width: '100%'}}>
+    <div style={{ margin: 'auto', width: '100%' }}>
 
 
-      <div style={{border: '1px solid green', borderRadius: 8, display: 'flex', padding: '1vw', overflowX: 'scroll', width: '100%', height: '30vh', margin: 'auto'}}>
-        {posts.map((post) => (
+      <div className="section">
+        {posts
+          .filter((post) => post.section === 1)
+          .map((post) => (
+            <div key={post.id} className='card'>
 
-          <div key={post.id} style={{border: '1px solid #eee', padding: 16, borderRadius: 8, margin: '1vh'}}>
-            <img src={post.imageUrl} alt="" style={{ height: '20vh', objectFit: 'cover', borderRadius: '8px'}} />
-            <p>{post.description}</p>
-            {isAdmin && (
-              <div className="flex gap-2 mt-2">
-                <button onClick={() => setSelectedPost(post)} className="bg-yellow-500 text-white px-2 py-1 rounded">Edit</button>
-                <button onClick={() => handleDelete(post.id)} className="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
-              </div>
-            )}
-          </div>
-        ))}
+              <img src={post.imageUrl} alt="" className='cardImg' />
+              <p className='cardDisc'>{post.description}</p>
+
+              {isAdmin && (
+                <div className="flex gap-2 mt-2">
+                  <button
+                    onClick={() => setSelectedPost(post)}
+                    className="bg-yellow-500 text-white px-2 py-1 rounded"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(post.id)}
+                    className="bg-red-500 text-white px-2 py-1 rounded"
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
 
         {isAdmin && (
-        <PostForm
-          existing={selectedPost}
-          onSave={() => {
-            setSelectedPost(null);
-            fetchPosts();
-          }}
-        />
-      )}
+          <PostForm existing={selectedPost}
+            onSave={() => {
+              setSelectedPost(null);
+              fetchPosts();
+            }} />
+        )}
+      </div>
 
+      <div className="section">
+        {posts
+          .filter((post) => post.section === 2)
+          .map((post) => (
+            <div key={post.id} className='card'>
 
+              <img src={post.imageUrl} alt="" className='cardImg' />
+              <p className='cardDisc'>{post.description}</p>
+
+              {isAdmin && (
+                <div className="flex gap-2 mt-2">
+                  <button
+                    onClick={() => setSelectedPost(post)}
+                    className="bg-yellow-500 text-white px-2 py-1 rounded"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(post.id)}
+                    className="bg-red-500 text-white px-2 py-1 rounded"
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
+
+        {isAdmin && (
+          <PostForm
+            existing={selectedPost}
+            onSave={() => {
+              setSelectedPost(null);
+              fetchPosts();
+            }}
+          />
+        )}
       </div>
 
 
+      <div className="section">
+        {posts
+          .filter((post) => post.section === 3)
+          .map((post) => (
+            <div key={post.id} className='card'>
+
+              <img src={post.imageUrl} alt="" className='cardImg' />
+              <p className='cardDisc'>{post.description}</p>
+
+              {isAdmin && (
+                <div className="flex gap-2 mt-2">
+                  <button
+                    onClick={() => setSelectedPost(post)}
+                    className="bg-yellow-500 text-white px-2 py-1 rounded"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(post.id)}
+                    className="bg-red-500 text-white px-2 py-1 rounded"
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
+
+        {isAdmin && (
+          <PostForm existing={selectedPost}
+            onSave={() => {
+              setSelectedPost(null);
+              fetchPosts();
+            }} />
+        )}
+      </div>
 
 
     </div>
