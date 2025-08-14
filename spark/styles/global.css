@@ -14,8 +14,8 @@ body{
   /* border: 1px solid #eee; */
   border-radius: 8px;
   display: flex;
-  /* padding: 1vw; */
   overflow-x: scroll;
+  overflow-y: hidden;
   width: 95%;
   height: 30vh;
   margin: 1vw;
@@ -43,6 +43,7 @@ body{
 
 .cardDisc {
     color: #fff;
+    margin: auto 1px;
 }
 
 .addCard {
@@ -102,9 +103,12 @@ body{
 }
 
 .cardDelete {
-    background-color: #ff4d4d;
-    color: #fff;
+    /* background-color: #ff4d4d; */
+    background-color: #1E1E1E;
+    /* color: #fff; */
+    color: #ff4d4d;
     padding: 8px 8px;
+    /* border: 1px solid #ff4d4d; */
     border: none;
     z-index: 10;
     border-radius: 10px;
@@ -128,6 +132,7 @@ body{
     align-items: space-between;
     justify-content: space-between;
     transition: all 0.4s ease-in-out;
+    height: 5vh;
 }
 
 .linkButton {
@@ -136,13 +141,13 @@ body{
     /* border: 0.5px solid ; */
     border: none;
     padding: 8px 16px;
-    height: 80%;
     position: relative;
     z-index: 10;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease-in;
     margin: auto 1px;
+    height: 5vh;
 }
 
 .linkButton:hover {
@@ -170,10 +175,12 @@ body{
 }
 
 .adminLogoutButton{
-    background-color: #ff4d4d;
-    color: #fff;
+    /* background-color: #ff4d4d; */
+    background-color: #1E1E1E;
+    /* color: #fff; */
+    color: #ff4d4d;
     padding: 8px 16px;
-    border: none;
+    border: 1px solid #ff4d4d;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
@@ -241,6 +248,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 100;
 }
 
 .inputFee {
