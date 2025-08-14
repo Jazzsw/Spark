@@ -1,5 +1,5 @@
 // pages/board.js
-import { useEffect, useState } from 'react';
+import { act, useEffect, useState } from 'react';
 import { db } from '../firebase/firebaseClient';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import PostForm from '../components/PostForm';
@@ -10,6 +10,7 @@ export default function Board() {
   const [selectedPost, setSelectedPost] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [activeCards, setActiveCards] = useState({});
+  const [labourFee, setLabourFee] = useState('');
 
 
 
@@ -49,6 +50,12 @@ export default function Board() {
     window.open(link, '_blank');
   };
 
+  const totalPrice = 
+    (parseFloat(posts.find(post => post.section === 1 && activeCards[1] === post.id)?.description) || 0) +
+    (parseFloat(posts.find(post => post.section === 2 && activeCards[2] === post.id)?.description) || 0) +
+    (parseFloat(posts.find(post => post.section === 3 && activeCards[3] === post.id)?.description) || 0) +
+    (parseFloat(labourFee) || 0);  
+
   return (
     <div className='boardContainer'>
 
@@ -63,7 +70,7 @@ export default function Board() {
               <img src={post.imageUrl} alt="" className='cardImg' />
 
               <div className='cardInfoWrapper'>
-                <p className='cardDisc'>{post.description}</p>
+                <p className='cardDisc'>$ {post.description}</p>
                 <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
               </div>
 
@@ -99,7 +106,7 @@ export default function Board() {
 
               <img src={post.imageUrl} alt="" className='cardImg' />
               <div className='cardInfoWrapper'>
-                <p className='cardDisc'>{post.description}</p>
+                <p className='cardDisc'>$ {post.description}</p>
                 <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
               </div>
 
@@ -136,7 +143,7 @@ export default function Board() {
 
               <img src={post.imageUrl} alt="" className='cardImg' />
               <div className='cardInfoWrapper'>
-                <p className='cardDisc'>{post.description}</p>
+                <p className='cardDisc'>$ {post.description}</p>
                 <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
               </div>
 
@@ -162,18 +169,31 @@ export default function Board() {
         )}
       </div>
 
+      <div className='labourFeeContainer'>
+        <h2 className='labourFeeTitle'>Labour Fee</h2>
+        <input type="text" placeholder="$" className='inputFee' id='labourFee' value={labourFee}
+          onChange={(e) => setLabourFee(e.target.value)} />
+      </div>
+
+    { !isAdmin && (
+    <div className='stickyFooter'>
+      <div className='resetContainer'>
+        <button className='resetButton' onClick={() => {
+          setActiveCards({});
+          setLabourFee('');
+        }}>Reset</button>
+      </div>
+
       <div>
         <div className='totalContainer'>
           <p className='totalTitle'>Total </p>
-          <h1 className='totalPrice'>$ {(
-              (parseFloat(posts.find(post => post.section === 1 && activeCards[1] === post.id)?.description) || 0) +
-              (parseFloat(posts.find(post => post.section === 2 && activeCards[2] === post.id)?.description) || 0) +
-              (parseFloat(posts.find(post => post.section === 3 && activeCards[3] === post.id)?.description) || 0)
-            ).toFixed(2)}
+          <h1 className='totalPrice' id='totalPrice'>${totalPrice.toFixed(2)}
           </h1>
         </div>
       </div>
-
+      
+    </div>
+    )}
 
     </div>
   );

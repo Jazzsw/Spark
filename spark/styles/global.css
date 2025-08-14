@@ -42,17 +42,22 @@ body{
 }
 
 .cardDisc {
-    font-size: 1.2vw;
     color: #fff;
-    margin-top: 8px;
 }
 
 .addCard {
     border: .5px solid #eee;
-    padding: 0px 5px;
+    padding: 1.5vh;
+    margin: 3vh;
+    height: 25vh;
+    width: 25vh;
+    transition: all 0.2s ease-in-out;
+    margin: auto 1vw;
+    overflow-y: hidden;
+    overflow: visible;
     display: flex;
     flex-direction: column;
-    width: 15vw;
+    align-items: center;
 }
 
 .card.active {
@@ -69,17 +74,22 @@ body{
     margin: 6px 5px;
     background-color: #2C2C2C;
     color: #fff;
+    width: 80%;
+    height: 10%;
 }
 
 .submitButton {
     background-color: #3995E6;
     color: #fff;
-    padding: 8px 16px;
-    margin-top: 10px;;
+    padding: 8px;
+    margin: 1px 5px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+    position: relative;
+    right: 1%;
+    width: 90%;
 }
 
 .submitButton:hover {
@@ -132,6 +142,7 @@ body{
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease-in;
+    margin: auto 1px;
 }
 
 .linkButton:hover {
@@ -170,7 +181,7 @@ body{
 
 .sectionTitle {
     color: #eee;
-    font-size: 1.5vw;
+    /* font-size: 1.5vw; */
     margin: 1vw;
 }
 
@@ -184,11 +195,59 @@ body{
 
 .totalTitle{
     color: #eee;
-    font-size: 1.5vw;
-    margin-right: 1vw;
+    font-size: 1.5em;
+    margin-right: 0.5em;
 }
 
 .totalPrice{
     color: #eee;
-    font-size: 2.5vw;
+    font-size: 2.5em;
+}
+
+.labourFeeTitle{
+    color: #eee;
+    margin-right: 0.5em;
+}
+
+.labourFeeContainer{
+    display: flex;
+    align-items: center;
+    margin: 1vw;
+}
+
+.resetButton{
+    background-color: #1E1E1E;
+    color: #fff;
+    padding: 8px 16px;
+    border: 1px solid #ff4d4d;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-left: 1vw;
+    font-size: 1.3em;
+}
+.resetContainer{
+    display: flex;
+    align-items: center;
+}
+
+.stickyFooter{
+    position: sticky;
+    bottom: 0;
+    background-color: #1E1E1E;
+    padding: 10px 0;
+    margin-top: 10px;
+    border-top: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inputFee {
+    border: 1px solid #eee;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 6px 5px;
+    background-color: #2C2C2C;
+    color: #fff;
 }

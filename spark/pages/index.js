@@ -58,7 +58,7 @@ export default function Home() {
 
           {isAdmin && (
             <>
-              <button className="adminLogoutButton" onClick={handleLogout}>Logout</button>
+              <button className="adminLogoutButton" onClick={handleLogout}>Exit Edit Mode</button>
             </>
           )}
 

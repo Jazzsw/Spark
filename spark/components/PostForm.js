@@ -71,7 +71,7 @@ export default function PostForm({ existing, onSave }) {
         className="inputBox"
       />
       <input
-        placeholder="Price"
+        placeholder="Price ($)"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         className="inputBox"
@@ -83,7 +83,7 @@ export default function PostForm({ existing, onSave }) {
         className="inputBox"
       />
       <input
-        placeholder="Section (1, 2, or 3)"
+        placeholder="Row (1, 2, or 3)"
         value={section}
         onChange={(e) => setSection(e.target.value)}
         className="inputBox"
