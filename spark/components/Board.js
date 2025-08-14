@@ -11,6 +11,7 @@ export default function Board() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [activeCards, setActiveCards] = useState({});
   const [labourFee, setLabourFee] = useState('');
+  const [showForm, setShowForm] = useState(false);
 
 
 
@@ -57,7 +58,38 @@ export default function Board() {
     (parseFloat(labourFee) || 0);  
 
   return (
+    
     <div className='boardContainer'>
+      {/* {isAdmin && (
+          <>
+          <div className='fullContainer'>
+          <div className="addCardButton" onClick={() => { if(!showForm){setShowForm(true)} else{ setShowForm(false) }}}>
+            <img src='https://i.imgur.com/9gOxvN1_d.png?maxwidth=520&shape=thumb&fidelity=high' alt="Add" className='addCardIcon' style={showForm ? {transform: 'rotate(45deg)'} : {}}></img>
+          </div>
+          {showForm && (
+            <PostForm
+              existing={selectedPost}
+              onSave={() => {
+                setSelectedPost(null);
+                fetchPosts();
+              }}
+            />
+          )}
+          </div>
+          </>
+        )} */}
+
+
+
+        {isAdmin && (
+          <PostForm
+            existing={selectedPost}
+            onSave={() => {
+              setSelectedPost(null);
+              fetchPosts();
+            }}
+          />
+        )}
 
       <h2 className='sectionTitle'>Section 1</h2>
       <div className="section">
@@ -87,13 +119,6 @@ export default function Board() {
             </div>
           ))}
 
-        {isAdmin && (
-          <PostForm existing={selectedPost}
-            onSave={() => {
-              setSelectedPost(null);
-              fetchPosts();
-            }} />
-        )}
       </div>
 
       <h2 className='sectionTitle'>Section 2</h2>
@@ -123,7 +148,7 @@ export default function Board() {
             </div>
           ))}
 
-        {isAdmin && (
+        {/* {isAdmin && (
           <PostForm
             existing={selectedPost}
             onSave={() => {
@@ -131,7 +156,7 @@ export default function Board() {
               fetchPosts();
             }}
           />
-        )}
+        )} */}
       </div>
 
       <h2 className='sectionTitle'>Section 3</h2>
@@ -160,13 +185,13 @@ export default function Board() {
             </div>
           ))}
 
-        {isAdmin && (
+        {/* {isAdmin && (
           <PostForm existing={selectedPost}
             onSave={() => {
               setSelectedPost(null);
               fetchPosts();
             }} />
-        )}
+        )} */}
       </div>
 
       

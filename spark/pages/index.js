@@ -12,6 +12,7 @@ export default function Home() {
   const [showForm, setShowForm] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [detailsView, setDetailsView] = useState(false);
+  
 
 
   useEffect(() => {
@@ -50,8 +51,12 @@ export default function Home() {
       <header style={{ display: 'flex', justifyContent: 'end', alignItems: 'center', marginBottom: 24 }}>
         {/* <h1 style={{color: '#eee'}}>Price Calculator</h1> */}
         <div style={{ display: 'flex', gap: 8 }}>
-          <button className="toggleDetailsButton" onClick={() => toggleDetails()}>Show/Hide Details</button>
-         
+
+          <div className="toggleDetailsButton" onClick={() => toggleDetails()}> 
+          <h2 className='shDetails'> { detailsView ? 'Hide Details' : 'Show Details' } </h2>
+          <img src={detailsView ? 'https://i.imgur.com/dexYLQq.png' : 'https://i.imgur.com/a6Zrbuw.png'} className='toggleDetailsIcon' alt="Toggle Details" />
+          </div>
+
          {!isAdmin && (
             <button className="adminLoginButton" onClick={handleLogin}>Login To Edit</button>
           )}
