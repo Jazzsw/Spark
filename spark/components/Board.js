@@ -169,13 +169,17 @@ export default function Board() {
         )}
       </div>
 
+      
+
+    { !isAdmin && (
+      <>
       <div className='labourFeeContainer'>
         <h2 className='labourFeeTitle'>Labour Fee</h2>
         <input type="text" placeholder="$" className='inputFee' id='labourFee' value={labourFee}
           onChange={(e) => setLabourFee(e.target.value)} />
       </div>
 
-    { !isAdmin && (
+
     <div className='stickyFooter'>
       <div className='resetContainer'>
         <button className='resetButton' onClick={() => {
@@ -193,8 +197,10 @@ export default function Board() {
       </div>
       
     </div>
+    </>
     )}
 
     </div>
+    
   );
 }

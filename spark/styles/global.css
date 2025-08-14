@@ -17,8 +17,8 @@ body{
   overflow-x: scroll;
   overflow-y: hidden;
   width: 95%;
-  height: 30vh;
-  margin: 1vw;
+  height: 33vh;
+  
 }
 
 .card {
@@ -44,6 +44,7 @@ body{
 .cardDisc {
     color: #fff;
     margin: auto 1px;
+    font-size: 1.2em;
 }
 
 .addCard {
@@ -115,8 +116,8 @@ body{
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     position: relative;
-    left: 80%;
-    width: fit-content;
+    left: 75%;
+    width: 30%;
 }
 
 .buttonContainer {
@@ -148,6 +149,7 @@ body{
     transition: background-color 0.2s ease-in;
     margin: auto 1px;
     height: 5vh;
+    font-size: 1em;
 }
 
 .linkButton:hover {
