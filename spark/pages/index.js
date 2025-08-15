@@ -62,7 +62,7 @@ export default function Home() {
 
   return (
     <div style={{ padding: 24, maxWidth: 1100, margin: '0 auto' }}>
-      <header style={{ display: 'flex', justifyContent: 'end', alignItems: 'center', marginBottom: 24 }}>
+      <header className='header' style={{ display: 'flex', justifyContent: 'end', alignItems: 'center', marginBottom: 24 }}>
         {/* <h1 style={{color: '#eee'}}>Price Calculator</h1> */}
         <div style={{ display: 'flex', gap: 8 }}>
 

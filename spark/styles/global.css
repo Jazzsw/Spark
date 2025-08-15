@@ -11,6 +11,8 @@ body{
     flex-direction: column;
 }
 
+
+
 .section {
   /* border: 1px solid #eee; */
   border-radius: 8px;
@@ -95,6 +97,9 @@ body{
     width: 80%;
     height: 50%;
 }
+.inputBox:focus {
+  outline: none;
+}
 
 .addText{
     color: lightgray;
@@ -112,7 +117,7 @@ body{
 }
 
 .submitButton {
-    background-color: #1E1E1E;
+    /* background-color: #1E1E1E; */
     color: #fff;
     padding: 8px 16px;
     font-size: 1em;
@@ -120,18 +125,40 @@ body{
     border: 1px solid #3995E6;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
     margin: 16px;
+
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+}
+
+/* .submitButton:hover {
+    background-color: #2a7bbf;
+} */
+.submitButton::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0;
+  left: -40px;
+  transform: skewX(45deg);
+  background-color: #3995E6;
+  z-index: -1;
+  transition: all 0.5s;
 }
 
 .submitButton:hover {
-    background-color: #2a7bbf;
+  color: white;
 }
 
-.submitButton:disabled {
-    background-color: #666;
-    cursor: not-allowed;
+.submitButton:hover::before {
+  width: 160%;
 }
+
+
+
 
 .cardDelete {
     /* background-color: #ff4d4d; */
@@ -140,14 +167,16 @@ body{
     padding: 8px 8px;
     border: none;
     z-index: 10;
-    border-radius: 0 8px 0 8px;
+    border-radius: 0 8px 8px 0px;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    /* transition: background-color 0.2s ease-in-out; */
     position: relative;
-    left: 69%;
+    left: -0.6%;
     width: 35%;
     height: 25%;
-    transition: all 0.2s ease-in-out;
+    top: 1%;
+    /* transition: all 0.25s linear; */
+    transition: left 0.26s linear, width 0.25s linear, height 0.25s linear, font-size 0.25s linear;
 }
 .cardDelete:hover {
     background-color: #ff4d4d;
@@ -157,6 +186,9 @@ body{
     position: fixed;
     left: 0;
     border-radius: 8px;
+    font-size: 2em;
+    top: 0%;
+    
 }
 
 .buttonContainer {
@@ -251,6 +283,9 @@ body{
     #rowInput {
         width: 50%;
     }
+    .cardDelete{
+        top:1%;
+    }
 }
 
 .toggleDetailsIcon{
@@ -291,7 +326,10 @@ body{
     height: 2.5em;
     position: absolute;
     right: 1em;
-
+}
+.adminLogoutButton:hover {
+    background-color: #ff4d4d;
+    color: #fff;
 }
 
 .sectionTitle {
@@ -374,6 +412,11 @@ body{
     /* background-color: #2C2C2C; */
     background-color: #1E1E1E;
     color: #fff;
+    
+}
+
+.inputFee:focus {
+  outline: none;
 }
 
 .addCardButton{
@@ -451,7 +494,9 @@ body{
     background-color: #1E1E1E;
     color: #fff;
 }
-
+.loginInput:focus {
+  outline: none;
+}
 .loginButton{
     background-color: #1E1E1E;
     color: #fff;
