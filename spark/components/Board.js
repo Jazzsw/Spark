@@ -46,7 +46,6 @@ export default function Board() {
     }));
   };
 
-
   const handleLinkClick = (link) => {
     window.open(link, '_blank');
   };
@@ -113,6 +112,7 @@ export default function Board() {
                   >
                     Delete
                   </button>
+                  
                 </div>
               )}
             </div>

@@ -56,16 +56,13 @@ export default function Home() {
     });
   }
 
-  const handleLoginClick = () => {
-    setLoginView(true);
-  };
 
   return (
     <div style={{ padding: 24, maxWidth: 1100, margin: '0 auto' }}>
-      <header className='header' style={{ display: 'flex', justifyContent: 'end', alignItems: 'center', marginBottom: 24 }}>
-        {/* <h1 style={{color: '#eee'}}>Price Calculator</h1> */}
+      <div className="header"></div>
+      <header style={{ display: 'flex', justifyContent: 'end', alignItems: 'center', marginBottom: 24 }}>
+       <h1 className='title'>Lumen</h1>
         <div style={{ display: 'flex', gap: 8 }}>
-
           <div className="toggleDetailsButton" onClick={() => toggleDetails()}> 
           <h2 className='shDetails'> { detailsView ? 'Hide Details' : 'Show Details' } </h2>
           <img src={detailsView ? 'https://i.imgur.com/dexYLQq.png' : 'https://i.imgur.com/a6Zrbuw.png'} className='toggleDetailsIcon' alt="Toggle Details" />
