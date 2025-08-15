@@ -12,6 +12,7 @@ export default function Home() {
   const [showForm, setShowForm] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [detailsView, setDetailsView] = useState(false);
+  const [loginView, setLoginView] = useState(false);
   
 
 
@@ -22,9 +23,19 @@ export default function Home() {
   }, []);
 
   const handleLogin = () => {
-    const email = prompt('Enter admin email:');
-    const pwd = prompt('Enter password:');
+    // const email = prompt('Enter admin email:');
+    // const pwd = prompt('Enter password:');
+    const email = document.getElementById('emailBox').value;
+    const pwd = document.getElementById('passwordBox').value;
+
+    if (!email || !pwd) {
+      alert('Please enter both email and password.');
+      return;
+    }
     signInWithEmailAndPassword(auth, email, pwd).catch(() => alert('Login failed'));
+    setLoginView(false);
+    document.getElementById('emailBox').value = '';
+    document.getElementById('passwordBox').value = '';
   };
 
   const handleLogout = () => {
@@ -44,7 +55,9 @@ export default function Home() {
     });
   }
 
-  
+  const handleLoginClick = () => {
+    setLoginView(true);
+  };
 
   return (
     <div style={{ padding: 24, maxWidth: 1100, margin: '0 auto' }}>
@@ -58,7 +71,21 @@ export default function Home() {
           </div>
 
          {!isAdmin && (
-            <button className="adminLoginButton" onClick={handleLogin}>Login To Edit</button>
+          <>
+          <div className='loginContainer'>
+            <button className="adminLoginButton" style= {loginView ? {border: '1px solid #ff4d4d', backgroundColor: '#1E1E1E'} : {}} onClick={() => setLoginView(!loginView)}>{loginView ? 'Cancel' : 'Login To Edit'}</button>
+              {loginView && (
+                <>
+                  <div className='loginBlock'>
+                    <h2 className='adminLoginText'>Admin Login</h2>
+                    <input id='emailBox' className='loginInput' type="email" placeholder="Email" />
+                    <input id='passwordBox' className='loginInput' type="password" placeholder="Password" />
+                    <button className='loginButton' onClick={handleLogin}>Login</button>
+                  </div>
+                </>
+              )}
+            </div>
+            </>
           )}
 
           {isAdmin && (

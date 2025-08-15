@@ -79,8 +79,6 @@ export default function Board() {
           </>
         )} */}
 
-
-
         {isAdmin && (
           <PostForm
             existing={selectedPost}

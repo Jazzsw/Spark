@@ -25,7 +25,7 @@ body{
 .card {
     border: .5px solid #eee;
     padding: 1vh;
-    /* border-radius: 8px; */
+    border-radius: 8px;
     margin: 3vh;
     height: 25vh;
     width: 25vh;
@@ -39,6 +39,7 @@ body{
     height: 25vh;
     width: 25vh;
     object-fit: cover;
+    transition: height 0.5s ease-in-out;
     /* border-radius: 8px; */
 }
 
@@ -139,7 +140,8 @@ body{
     display: none;
     align-items: space-between;
     justify-content: space-between;
-    transition: all 0.4s ease-in-out;
+    transition: all 0.5s 0.5s;
+    transition-delay: 1s;
     height: 5vh;
 }
 
@@ -160,24 +162,37 @@ body{
 }
 
 .linkButton:hover {
-    background-color: #2a7bbf;
+    background-color: #eee;
+    color: #1E1E1E;
 }
 
 .toggleDetailsButton{
     background-color: #2C2C2C;
     color: #fff;
-    padding: 8px;
+    padding: 8px 16px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
-    height: 1em;
+    height: calc(1em + 8px);
     display: flex;
+    position: absolute;
+    right: 10em;
+
+}
+.toggleDetailsButton:hover {
+    background-color: #eee;
+    color: #1E1E1E; 
+}
+
+.toggleDetailsButton:hover .toggleDetailsIcon {
+    filter: invert(0.3);
 }
 
 .shDetails{
-    margin: -0.1em 8px;
+    margin: auto 8px;
     font-size: 1em;
+    font-weight: lighter;
 }
 
 @media only screen and (max-width: 600px) {
@@ -196,7 +211,7 @@ body{
     width: 24px;
     height: 24px;
     filter: invert(1);
-    margin-top: -0.25em;
+    /* margin-top: -0.25em; */
     animation: forwards 0.3s ease-in-out;
 }
 
@@ -208,18 +223,29 @@ body{
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+    font-size: 1em;
+    font-weight: lighter;
+    height: 2.5em;
+}
+.adminLoginButton:hover {
+    background-color: #2a7bbf;
 }
 
 .adminLogoutButton{
     /* background-color: #ff4d4d; */
     background-color: #1E1E1E;
     /* color: #fff; */
-    color: #ff4d4d;
+    color: #eee;
     padding: 8px 16px;
     border: 1px solid #ff4d4d;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+    font-size: 1em;
+    height: 2.5em;
+    position: absolute;
+    right: 1em;
+
 }
 
 .sectionTitle {
@@ -269,6 +295,12 @@ body{
     margin-left: 1vw;
     font-size: 1.3em;
 }
+.resetButton:hover {
+    background-color: #ff4d4d;
+    color: #fff;
+}
+
+
 .resetContainer{
     display: flex;
     align-items: center;
@@ -285,14 +317,16 @@ body{
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+
 }
 
 .inputFee {
-    border: 1px solid #eee;
+    border: 0.5px solid #eee;
     padding: 8px;
     border-radius: 4px;
     margin: 6px 5px;
-    background-color: #2C2C2C;
+    /* background-color: #2C2C2C; */
+    background-color: #1E1E1E;
     color: #fff;
 }
 
@@ -338,4 +372,61 @@ body{
 .addCol2{
     display: flex;
   
+}
+
+.loginContainer{
+    width: 8em;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: absolute;
+    right: 1em;
+}
+
+.loginBlock{
+    /* border: #eee solid 0.5px; */
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    background-color: #131313a8;
+    width: 15em;
+    position: absolute;
+    top: 3em;
+    right: 0;
+}
+
+.loginInput{
+    /* border: 0.5px solid #eee; */
+    margin: 8px 8px;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #1E1E1E;
+    color: #fff;
+}
+
+.loginButton{
+    background-color: #1E1E1E;
+    color: #fff;
+    padding: 8px 16px;
+    border: 0.5px solid #3995E6;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    font-size: 1em;
+    font-weight: lighter;
+    height: 2.5em;
+    margin: 8px 8px;
+}
+
+.loginButton:hover {
+    background-color: #2a7bbf;
+}
+
+.adminLoginText {
+    color: #eee;
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
 }
