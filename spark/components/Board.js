@@ -112,6 +112,16 @@ export default function Board() {
                   >
                     Delete
                   </button>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedPost(post);
+                    }}
+                    className="editButton"
+                  >
+                    Edit
+                  </button>
                   
                 </div>
               )}
@@ -141,6 +151,15 @@ export default function Board() {
                     className="cardDelete"
                   >
                     Delete
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedPost(post); 
+                    }}
+                    className="editButton"
+                  >
+                    Edit
                   </button>
                 </div>
               )}
@@ -178,6 +197,16 @@ export default function Board() {
                     className="cardDelete"
                   >
                     Delete
+                  </button>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedPost(post); 
+                    }}
+                    className="editButton"
+                  >
+                    Edit
                   </button>
                 </div>
               )}
