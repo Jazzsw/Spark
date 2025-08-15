@@ -46,12 +46,35 @@ body{
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
-  width: 95%;
+  width: 98%;
   height: 33vh;
   /* border-top: 1px solid #333;
   padding-top: 0px;
   margin-top: 8px; */
 }
+
+
+@keyframes shake {
+  0%   { transform: rotate(-1.6deg) translateY(0); }
+  10%  { transform: rotate(1.5deg)  translateY(-0.5px); }
+  20%  { transform: rotate(-1.3deg) translateY(0.2px); }
+  30%  { transform: rotate(1.6deg)  translateY(-0.3px); }
+  40%  { transform: rotate(-1.4deg) translateY(0.4px); }
+  50%  { transform: rotate(1.4deg)  translateY(-0.2px); }
+  60%  { transform: rotate(-1.7deg) translateY(0.1px); }
+  70%  { transform: rotate(1.3deg)  translateY(-0.4px); }
+  80%  { transform: rotate(-1.5deg) translateY(0.3px); }
+  90%  { transform: rotate(1.6deg)  translateY(-0.1px); }
+  100% { transform: rotate(-1.6deg) translateY(0); }
+}
+
+
+
+/* accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .icon { animation: none; }
+}
+
 
 .card {
     border: .5px solid #eee;
@@ -64,11 +87,18 @@ body{
     margin: auto 1vw;
     overflow: visible;
     
+
+    display: inline-block;
+    transform-origin: 50% 60%;   /* feels closer to iOS pivot */
 }
 .card:hover {
     transform: scale(1.02);
     transition: all 0.2s ease-in-out;
 }
+
+.card:nth-child(3n)  { animation-delay: 0.05s; }
+.card:nth-child(4n)  { animation-delay: 0.12s; }
+.card:nth-child(5n)  { animation-delay: 0.18s; }
 
 .cardImg{
     height: 25vh;
@@ -100,7 +130,7 @@ body{
     flex-direction: column;
     align-items: center;
     border-radius: 8px;
-    box-shadow: #eeeeee14 0px 0px 20px;
+    /* box-shadow: #eeeeee14 0px 0px 20px; */
 }
 #priceInput {
     width: 35%;
@@ -214,6 +244,7 @@ body{
     border-radius: 8px;
     font-size: 2em;
     top: 0%;   */
+    
     scale: 1.05;
     border: 1px dashed #ff4d4d;
     z-index: 1000;
