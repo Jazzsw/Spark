@@ -94,9 +94,10 @@ export default function Board() {
         {posts
           .filter((post) => post.section === 1)
           .map((post) => (
+            
             <div key={post.id} className={`card ${activeCards[1] === post.id ? 'active' : ''}`}
               onClick={() => handleCardClick(1, post.id)}>
-
+              
               <img src={post.imageUrl} alt="" className='cardImg' />
 
               <div className='cardInfoWrapper'>

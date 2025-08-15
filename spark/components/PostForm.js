@@ -64,7 +64,6 @@ export default function PostForm({ existing, onSave }) {
 
   return (
     <>
-
     <form onSubmit={handleSubmit} className="addCard">
       <h2>Add A Product</h2>
 
@@ -77,6 +76,7 @@ export default function PostForm({ existing, onSave }) {
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
           className="inputBox"
+          id = 'urlInput'
         />
         </div>
 
@@ -87,6 +87,7 @@ export default function PostForm({ existing, onSave }) {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         className="inputBox"
+        id = 'priceInput'
       />
       </div>
       </div>
@@ -105,10 +106,11 @@ export default function PostForm({ existing, onSave }) {
       <div className='pairText'>
         <h2 className='addText'>Row</h2>
       <input
-        placeholder="Row (1, 2, or 3)"
+        placeholder="(1, 2, or 3)"
         value={section}
         onChange={(e) => setSection(e.target.value)}
         className="inputBox"
+        id = 'rowInput'
       />
       </div>
       </div>
@@ -123,8 +125,6 @@ export default function PostForm({ existing, onSave }) {
       </button>
       </div>
     </form>
-
-
 
     </>
   );

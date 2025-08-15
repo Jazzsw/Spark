@@ -46,7 +46,8 @@ export default function Home() {
     setDetailsView(!detailsView);
     document.querySelectorAll('.cardInfoWrapper')
     .forEach(element => {
-    element.style.display = detailsView ? 'none' : 'flex';
+    // element.style.display = detailsView ? 'none' : 'flex';
+    element.style.height = detailsView ? '0px' : '5vh';
     });
 
     document.querySelectorAll('.cardImg')
