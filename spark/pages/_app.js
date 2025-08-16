@@ -17,6 +17,7 @@ export default function MyApp({ Component, pageProps }) {
 
   return (<>
       <Head>
+        <link rel="apple-touch-icon" href="/icon.png" type="image/x-icon" sizes="any"/>
         <link rel="icon" href="/icon.png" type="image/x-icon"  />
         <title>Lumen</title>
       </Head>

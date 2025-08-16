@@ -57,6 +57,14 @@ export default function Home() {
     });
   }
 
+  const listenForEnter = () => {
+    document.getElementById('passwordBox').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        handleLogin();
+      }
+    });
+  };
+
 
   return (
     <div style={{ padding: 24, maxWidth: 1100, margin: '0 auto' }}>
@@ -78,7 +86,7 @@ export default function Home() {
                   <div className='loginBlock'>
                     <h2 className='adminLoginText'>Admin Login</h2>
                     <input id='emailBox' className='loginInput' type="email" placeholder="Email" />
-                    <input id='passwordBox' className='loginInput' type="password" placeholder="Password" />
+                    <input id='passwordBox' className='loginInput' type="password" placeholder="Password" onClick={() => listenForEnter()}/>
                     <button className='loginButton' onClick={handleLogin}>Login</button>
                   </div>
                 </>
