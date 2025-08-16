@@ -6,6 +6,7 @@ import { app } from '../firebase/firebaseClient';
 const PostForm = dynamic(() => import('../components/PostForm'), { ssr: false });
 const Board = dynamic(() => import('../components/Board'), { ssr: false });
 
+
 export default function Home() {
   const auth = getAuth(app);
   const [editing, setEditing] = useState(null);

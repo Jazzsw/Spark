@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { app } from '../firebase/firebaseClient';
 import '../styles/global.css'
+import Head from 'next/head'
 
 
 export default function MyApp({ Component, pageProps }) {
@@ -14,5 +15,12 @@ export default function MyApp({ Component, pageProps }) {
     return () => unsub();
   }, []);
 
-  return <Component {...pageProps} />;
+  return (<>
+      <Head>
+        <link rel="icon" href="/icon.png" type="image/x-icon"  />
+        <title>Lumen Price Calculator</title>
+      </Head>
+      <Component {...pageProps} />
+    </>
+  );
 }
