@@ -18,7 +18,7 @@ export default function MyApp({ Component, pageProps }) {
   return (<>
       <Head>
         <link rel="icon" href="/icon.png" type="image/x-icon"  />
-        <title>Lumen Price Calculator</title>
+        <title>Lumen</title>
       </Head>
       <Component {...pageProps} />
     </>
