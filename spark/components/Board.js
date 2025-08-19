@@ -3,6 +3,7 @@ import { act, useEffect, useState } from 'react';
 import { db } from '../firebase/firebaseClient';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import PostForm from '../components/PostForm';
+import CustomAdd from '../components/CustomAdd';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 export default function Board() {
@@ -12,6 +13,7 @@ export default function Board() {
   const [activeCards, setActiveCards] = useState({});
   const [labourFee, setLabourFee] = useState('');
   const [showForm, setShowForm] = useState(false);
+  const [CustomValue, setCustomValue] = useState({});
 
 
 
@@ -50,33 +52,19 @@ export default function Board() {
     window.open(link, '_blank');
   };
 
-  const totalPrice = 
-    (parseFloat(posts.find(post => post.section === 1 && activeCards[1] === post.id)?.description) || 0) +
-    (parseFloat(posts.find(post => post.section === 2 && activeCards[2] === post.id)?.description) || 0) +
-    (parseFloat(posts.find(post => post.section === 3 && activeCards[3] === post.id)?.description) || 0) +
-    (parseFloat(labourFee) || 0);  
+ const totalPrice = 
+  (parseFloat(posts.find(post => post.section === 1 && activeCards[1] === post.id)?.description) || 0) +
+  (parseFloat(posts.find(post => post.section === 2 && activeCards[2] === post.id)?.description) || 0) +
+  (parseFloat(posts.find(post => post.section === 3 && activeCards[3] === post.id)?.description) || 0) +
+  (parseFloat(labourFee) || 0) +
+  (activeCards[1] === 'custom1' ? (parseFloat(CustomValue[1]) || 0) : 0) +
+  (activeCards[2] === 'custom2' ? (parseFloat(CustomValue[2]) || 0) : 0) +
+  (activeCards[3] === 'custom3' ? (parseFloat(CustomValue[3]) || 0) : 0);
+
 
   return (
     
     <div className='boardContainer'>
-      {/* {isAdmin && (
-          <>
-          <div className='fullContainer'>
-          <div className="addCardButton" onClick={() => { if(!showForm){setShowForm(true)} else{ setShowForm(false) }}}>
-            <img src='https://i.imgur.com/9gOxvN1_d.png?maxwidth=520&shape=thumb&fidelity=high' alt="Add" className='addCardIcon' style={showForm ? {transform: 'rotate(45deg)'} : {}}></img>
-          </div>
-          {showForm && (
-            <PostForm
-              existing={selectedPost}
-              onSave={() => {
-                setSelectedPost(null);
-                fetchPosts();
-              }}
-            />
-          )}
-          </div>
-          </>
-        )} */}
 
         {isAdmin && (
           <PostForm
@@ -88,7 +76,7 @@ export default function Board() {
           />
         )}
 
-      <h2 className='sectionTitle'>Section 1</h2>
+      <h2 className='sectionTitle'>Canopy</h2>
       <div className="section">
         {posts
           .filter((post) => post.section === 1)
@@ -104,22 +92,14 @@ export default function Board() {
                 <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
               </div>
 
+
               {isAdmin && (
                 <div className="buttonContainer">
-                  <button
-                    onClick={() => handleDelete(post.id)}
-                    className="cardDelete"
-                  >
+                  <button onClick={() => handleDelete(post.id)} className="cardDelete">
                     Delete
                   </button>
 
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedPost(post);
-                    }}
-                    className="editButton"
-                  >
+                  <button onClick={(e) => {e.stopPropagation(); setSelectedPost(post);}} className="editButton">
                     Edit
                   </button>
                   
@@ -127,6 +107,19 @@ export default function Board() {
               )}
             </div>
           ))}
+
+
+          {/** Custom Add Card **/}
+          <div className={`card ${activeCards[1] === "custom1" ? 'active' : ''}`} key='custom1' onClick={() => handleCardClick(1, "custom1")}>
+            <h2 className="addTitle">Custom Price</h2>
+            <input
+                type="text"
+                placeholder="Custom Price"
+                value={CustomValue[1] || ''}
+                onChange={(e) => setCustomValue({ ...CustomValue, [1]: e.target.value })}
+                className="customInputBox"
+            />
+          </div> 
 
       </div>
 
@@ -146,35 +139,24 @@ export default function Board() {
 
               {isAdmin && (
                 <div className="buttonContainer">
-                  <button
-                    onClick={() => handleDelete(post.id)}
-                    className="cardDelete"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedPost(post); 
-                    }}
-                    className="editButton"
-                  >
-                    Edit
-                  </button>
+                  <button onClick={() => handleDelete(post.id)} className="cardDelete">Delete</button>
+                  <button onClick={(e) => { e.stopPropagation(); setSelectedPost(post);}} className="editButton">Edit</button>
                 </div>
               )}
             </div>
           ))}
 
-        {/* {isAdmin && (
-          <PostForm
-            existing={selectedPost}
-            onSave={() => {
-              setSelectedPost(null);
-              fetchPosts();
-            }}
-          />
-        )} */}
+        {/** Custom Add Card **/}
+          <div className={`card ${activeCards[2] === "custom2" ? 'active' : ''}`} key='custom2' onClick={() => handleCardClick(2, "custom2")}>
+            <h2 className="addTitle">Custom Price</h2>
+            <input
+                type="text"
+                placeholder="Custom Price"
+                value={CustomValue[2] || ''}
+                onChange={(e) => setCustomValue({ ...CustomValue, [2]: e.target.value })}
+                className="customInputBox"
+            />
+          </div> 
       </div>
 
       <h2 className='sectionTitle'>Section 3</h2>
@@ -192,34 +174,25 @@ export default function Board() {
 
               {isAdmin && (
                 <div className="buttonContainer">
-                  <button
-                    onClick={() => handleDelete(post.id)}
-                    className="cardDelete"
-                  >
-                    Delete
-                  </button>
+                  <button onClick={() => handleDelete(post.id)} className="cardDelete">Delete</button>
 
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedPost(post); 
-                    }}
-                    className="editButton"
-                  >
-                    Edit
-                  </button>
+                  <button onClick={(e) => {e.stopPropagation(); setSelectedPost(post);}} className="editButton">Edit</button>
                 </div>
               )}
             </div>
           ))}
 
-        {/* {isAdmin && (
-          <PostForm existing={selectedPost}
-            onSave={() => {
-              setSelectedPost(null);
-              fetchPosts();
-            }} />
-        )} */}
+        {/** Custom Add Card **/}
+          <div className={`card ${activeCards[3] === "custom3" ? 'active' : ''}`} key='custom3' onClick={() => handleCardClick(3, "custom3")}>
+            <h2 className="addTitle">Custom Price</h2>
+            <input
+                type="text"
+                placeholder="Custom Price"
+                value={CustomValue[3] || ''}
+                onChange={(e) => setCustomValue({ ...CustomValue, [3]: e.target.value })}
+                className="customInputBox"
+            />
+          </div> 
       </div>
 
       
@@ -227,7 +200,7 @@ export default function Board() {
     { !isAdmin && (
       <>
       <div className='labourFeeContainer'>
-        <h2 className='labourFeeTitle'>Labour Fee</h2>
+        <h2 className='labourFeeTitle'>Additional Fees</h2>
         <input type="text" placeholder="$" className='inputFee' id='labourFee' value={labourFee}
           onChange={(e) => setLabourFee(e.target.value)} />
       </div>
