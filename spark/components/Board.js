@@ -5,6 +5,7 @@ import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import PostForm from '../components/PostForm';
 import CustomAdd from '../components/CustomAdd';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import Section from "../components/Section";
 
 export default function Board() {
   const [posts, setPosts] = useState([]);
@@ -75,128 +76,49 @@ export default function Board() {
             }}
           />
         )}
-
-      <h2 className='sectionTitle'>Canopy</h2>
-      <div className="section">
-        {posts
-          .filter((post) => post.section === 1)
-          .map((post) => (
-            
-            <div key={post.id} className={`card ${activeCards[1] === post.id ? 'active' : ''}`}
-              onClick={() => handleCardClick(1, post.id)}>
-              
-              <img src={post.imageUrl} alt="" className='cardImg' />
-
-              <div className='cardInfoWrapper'>
-                <p className='cardDisc'>$ {post.description}</p>
-                <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
-              </div>
-
-
-              {isAdmin && (
-                <div className="buttonContainer">
-                  <button onClick={() => handleDelete(post.id)} className="cardDelete">
-                    Delete
-                  </button>
-
-                  <button onClick={(e) => {e.stopPropagation(); setSelectedPost(post);}} className="editButton">
-                    Edit
-                  </button>
-                  
-                </div>
-              )}
-            </div>
-          ))}
-
-
-          {/** Custom Add Card **/}
-          <div className={`card ${activeCards[1] === "custom1" ? 'active' : ''}`} key='custom1' onClick={() => handleCardClick(1, "custom1")}>
-            <h2 className="addTitle">Custom Price</h2>
-            <input
-                type="text"
-                placeholder="Custom Price"
-                value={CustomValue[1] || ''}
-                onChange={(e) => setCustomValue({ ...CustomValue, [1]: e.target.value })}
-                className="customInputBox"
-            />
-          </div> 
-
-      </div>
-
-      <h2 className='sectionTitle'>Section 2</h2>
-      <div className="section">
-        {posts
-          .filter((post) => post.section === 2)
-          .map((post) => (
-            <div key={post.id} className={`card ${activeCards[2] === post.id ? 'active' : ''}`}
-              onClick={() => handleCardClick(2, post.id)}>
-
-              <img src={post.imageUrl} alt="" className='cardImg' />
-              <div className='cardInfoWrapper'>
-                <p className='cardDisc'>$ {post.description}</p>
-                <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
-              </div>
-
-              {isAdmin && (
-                <div className="buttonContainer">
-                  <button onClick={() => handleDelete(post.id)} className="cardDelete">Delete</button>
-                  <button onClick={(e) => { e.stopPropagation(); setSelectedPost(post);}} className="editButton">Edit</button>
-                </div>
-              )}
-            </div>
-          ))}
-
-        {/** Custom Add Card **/}
-          <div className={`card ${activeCards[2] === "custom2" ? 'active' : ''}`} key='custom2' onClick={() => handleCardClick(2, "custom2")}>
-            <h2 className="addTitle">Custom Price</h2>
-            <input
-                type="text"
-                placeholder="Custom Price"
-                value={CustomValue[2] || ''}
-                onChange={(e) => setCustomValue({ ...CustomValue, [2]: e.target.value })}
-                className="customInputBox"
-            />
-          </div> 
-      </div>
-
-      <h2 className='sectionTitle'>Section 3</h2>
-      <div className="section">
-        {posts
-          .filter((post) => post.section === 3)
-          .map((post) => (
-            <div key={post.id} className={`card ${activeCards[3] === post.id ? 'active' : ''}`} onClick={() => handleCardClick(3, post.id)}>
-
-              <img src={post.imageUrl} alt="" className='cardImg' />
-              <div className='cardInfoWrapper'>
-                <p className='cardDisc'>$ {post.description}</p>
-                <button className='linkButton' onClick={() => handleLinkClick(post.link)}>Link</button>
-              </div>
-
-              {isAdmin && (
-                <div className="buttonContainer">
-                  <button onClick={() => handleDelete(post.id)} className="cardDelete">Delete</button>
-
-                  <button onClick={(e) => {e.stopPropagation(); setSelectedPost(post);}} className="editButton">Edit</button>
-                </div>
-              )}
-            </div>
-          ))}
-
-        {/** Custom Add Card **/}
-          <div className={`card ${activeCards[3] === "custom3" ? 'active' : ''}`} key='custom3' onClick={() => handleCardClick(3, "custom3")}>
-            <h2 className="addTitle">Custom Price</h2>
-            <input
-                type="text"
-                placeholder="Custom Price"
-                value={CustomValue[3] || ''}
-                onChange={(e) => setCustomValue({ ...CustomValue, [3]: e.target.value })}
-                className="customInputBox"
-            />
-          </div> 
-      </div>
-
       
+        <Section
+        sectionId={1}
+        title="Canopy"
+        posts={posts.filter((p) => p.section === 1)}
+        activeCards={activeCards}
+        setActiveCards={setActiveCards}
+        CustomValue={CustomValue}
+        setCustomValue={setCustomValue}
+        isAdmin={isAdmin}
+        onDelete={handleDelete}
+        onEdit={(post) => setSelectedPost(post)}
+        onLinkClick={handleLinkClick}
+      />
 
+      <Section
+        sectionId={2}
+        title="Section 2"
+        posts={posts.filter((p) => p.section === 2)}
+        activeCards={activeCards}
+        setActiveCards={setActiveCards}
+        CustomValue={CustomValue}
+        setCustomValue={setCustomValue}
+        isAdmin={isAdmin}
+        onDelete={handleDelete}
+        onEdit={(post) => setSelectedPost(post)}
+        onLinkClick={handleLinkClick}
+      />
+
+      <Section
+        sectionId={3}
+        title="Section 3"
+        posts={posts.filter((p) => p.section === 3)}
+        activeCards={activeCards}
+        setActiveCards={setActiveCards}
+        CustomValue={CustomValue}
+        setCustomValue={setCustomValue}
+        isAdmin={isAdmin}
+        onDelete={handleDelete}
+        onEdit={(post) => setSelectedPost(post)}
+        onLinkClick={handleLinkClick}
+      />
+      
     { !isAdmin && (
       <>
       <div className='labourFeeContainer'>
