@@ -118,7 +118,7 @@ const totalPrice =
       <Section
         sectionId={2}
         title={`${connection} Length`}
-        posts={posts.filter((p) => p.section === 2)}
+        posts={posts.filter((p) => p.section === 2).sort((a, b) => a.text.localeCompare(b.text))}
         activeCards={activeCards}
         setActiveCards={setActiveCards}
         CustomValue={CustomValue}
@@ -138,7 +138,7 @@ const totalPrice =
       <Section
         sectionId={3}
         title="Fitter Size"
-        posts={posts.filter((p) => p.section === 3)}
+        posts={posts.filter((p) => p.section === 3).sort((a, b) => a.text.localeCompare(b.text))}
         activeCards={activeCards}
         setActiveCards={setActiveCards}
         CustomValue={CustomValue}
@@ -158,7 +158,7 @@ const totalPrice =
       <Section
         sectionId={4}
         title="Fitter Profile"
-        posts={posts.filter((p) => p.section === 4 && sec4Array.includes(p.profileID))}
+        posts={posts.filter((p) => p.section === 4 && (!isAdmin ? sec4Array.includes(p.profileID) : true))}
         activeCards={activeCards}
         setActiveCards={setActiveCards}
         CustomValue={CustomValue}
@@ -177,7 +177,7 @@ const totalPrice =
 
       <Section
         sectionId={5}
-        title="Finnish"
+        title="Finish"
         posts={posts.filter((p) => p.section === 5)}
         activeCards={activeCards}
         setActiveCards={setActiveCards}

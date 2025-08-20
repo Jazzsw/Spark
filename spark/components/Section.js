@@ -18,23 +18,33 @@ export default function Section({
     setSec4Array,
 }) {
   const handleCardClick = (postId) => {
+    const isCurrentlyActive = activeCards[sectionId] === postId;
+    const newActive = isCurrentlyActive ? null : postId;
+
     setActiveCards((prev) => ({
       ...prev,
       [sectionId]: prev[sectionId] === postId ? null : postId,
     }));
 
-    if(sectionId === 3) {
-        setSec4Array(posts.find(post => post.id === postId)?.children || []);
-        setShowFitter(!showFitter);
-        document.getElementById('section-4').style.display = showFitter ? "none" : "flex";
-        document.getElementById('section-4-title').style.display = showFitter ? "none" : "flex";
+    if (sectionId === 3) {
+        if (newActive === null) {
+            setShowFitter(false);
+            document.getElementById('section-4').style.display = "none";
+            document.getElementById('section-4-title').style.display = "none";
+        } else {
+            const selectedPost = posts.find(post => post.id === postId);
+            setSec4Array(selectedPost?.children || []);
+            setShowFitter(true);
+            document.getElementById('section-4').style.display = "flex";
+            document.getElementById('section-4-title').style.display = "flex";
+        }
     }
-  };
+};
 
   return (
     <>
-      <h2 className="sectionTitle" id={`section-${sectionId}-title`}>{title}</h2>
-      <div className={`section ${type === "image" ? "imageSection" : "textSection"}`} id={`section-${sectionId}`}>
+      <h2 id={`section-${sectionId}-title`} className={`sectionTitle ${showFitter ? "fitterTitle" : ""}`} style={{ display: isAdmin ? "flex" : "" }}>{title}</h2>
+      <div id={`section-${sectionId}`} className={`section ${type === "image" ? "imageSection" : "textSection"} ${showFitter ? "fitterSection" : ""}`} style={{ display: isAdmin ? "flex" : "" }}>
         {posts.map((post) => (
           <div
             key={post.id}
@@ -45,7 +55,7 @@ export default function Section({
             {type === "image" ? (
               <img src={post.imageUrl} alt="" className="cardImg" />
             ) : (
-              <div className="cardText">{post.text}</div>
+              <div className={`cardText ${sectionId === 5 ? "finishText" : ""}`}>{post.text}</div>
             )}
 
             <div className="cardInfoWrapper">
@@ -68,7 +78,7 @@ export default function Section({
                     e.stopPropagation();
                     onDelete(post.id);
                   }}
-                  className="cardDelete"
+                  className={`cardDelete ${type === "text" ? "textDelete" : ""}`}
                 >
                   Delete
                 </button>
@@ -77,7 +87,7 @@ export default function Section({
                     e.stopPropagation();
                     onEdit(post);
                   }}
-                  className="editButton"
+                  className={`editButton ${type === "text" ? "textEditButton" : ""}`}
                 >
                   Edit
                 </button>
