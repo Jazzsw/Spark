@@ -86,6 +86,7 @@ const totalPrice =
             addSection={addSection}
             setAddSection={setAddSection}
             existing={selectedPost}
+            row3={posts.filter((p) => p.section === 3)}
             onSave={() => {
               setSelectedPost(null);
               fetchPosts();

@@ -3,7 +3,7 @@ import { db } from '../firebase/firebaseClient';
 import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { Board, setShowForm } from '../components/Board';
 
-export default function PostForm({ existing, onSave, addSection, setAddSection }) {
+export default function PostForm({ existing, onSave, addSection, setAddSection, row3 }) {
   const [description, setDescription] = useState('');
   const [chainDescription, setChainDescription] = useState('');
   const [text, setText] = useState('');
@@ -86,6 +86,8 @@ export default function PostForm({ existing, onSave, addSection, setAddSection }
     {name: 'Satin Nickel', val: 'SN'},
     {name: 'Black', val: 'BK'},
   ];
+
+
 
   return (
     <>
