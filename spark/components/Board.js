@@ -18,6 +18,8 @@ export default function Board() {
   const [showFitter, setShowFitter] = useState(false);
   const [sec4Array, setSec4Array] = useState([]);
 
+  const [addSection, setAddSection] = useState('');
+
 
 
   const auth = getAuth();
@@ -81,6 +83,8 @@ const totalPrice =
 
         {isAdmin && (
           <PostForm
+            addSection={addSection}
+            setAddSection={setAddSection}
             existing={selectedPost}
             onSave={() => {
               setSelectedPost(null);
@@ -113,6 +117,7 @@ const totalPrice =
         showFitter={showFitter}
         setShowFitter={setShowFitter}
         setSec4Array={setSec4Array}
+        setAddSection={setAddSection}
       />
 
       <Section
@@ -133,6 +138,7 @@ const totalPrice =
         showFitter={showFitter}
         setShowFitter={setShowFitter}
         setSec4Array={setSec4Array}
+        setAddSection={setAddSection}
       />
       
       <Section
@@ -153,7 +159,8 @@ const totalPrice =
         showFitter={showFitter}
         setShowFitter={setShowFitter}
         setSec4Array={setSec4Array}
-      />
+        setAddSection={setAddSection}
+      />  
 
       <Section
         sectionId={4}
@@ -173,6 +180,7 @@ const totalPrice =
         showFitter={showFitter}
         setShowFitter={setShowFitter}
         setSec4Array={setSec4Array}
+        setAddSection={setAddSection}
       />
 
       <Section
@@ -193,6 +201,7 @@ const totalPrice =
         showFitter={showFitter}
         setShowFitter={setShowFitter}
         setSec4Array={setSec4Array}
+        setAddSection={setAddSection}
       />
       
     { !isAdmin && (

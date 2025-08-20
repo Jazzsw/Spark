@@ -784,8 +784,17 @@ body{
     color: #e3e6e8;
     border-radius: 8px;
     font-size: 1.3em;
-    margin: 16px;
+    height: 2em;
 }
 .selectOption:focus{
     outline: none;
+}
+
+.escBtn{
+    background-color: #2C2C2C;
+    color: #e3e6e8;
+    border: none;
+    border-radius: 8px;
+    height: 3em;
+    margin-left: 0.5em;;
 }

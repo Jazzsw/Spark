@@ -16,6 +16,7 @@ export default function Section({
   showFitter,
   setShowFitter,
     setSec4Array,
+    setAddSection,
 }) {
   const handleCardClick = (postId) => {
     const isCurrentlyActive = activeCards[sectionId] === postId;
@@ -85,6 +86,7 @@ export default function Section({
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
+                    setAddSection(sectionId.toString() || '');
                     onEdit(post);
                   }}
                   className={`editButton ${type === "text" ? "textEditButton" : ""}`}

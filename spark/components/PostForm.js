@@ -3,7 +3,7 @@ import { db } from '../firebase/firebaseClient';
 import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { Board, setShowForm } from '../components/Board';
 
-export default function PostForm({ existing, onSave }) {
+export default function PostForm({ existing, onSave, addSection, setAddSection }) {
   const [description, setDescription] = useState('');
   const [chainDescription, setChainDescription] = useState('');
   const [text, setText] = useState('');
@@ -11,7 +11,6 @@ export default function PostForm({ existing, onSave }) {
   const [section, setSection] = useState('');
   const [loading, setLoading] = useState(false);
   const [link, setLink] = useState('');
-  const [addSection, setAddSection] = useState('');
   const [selectedFinishes, setSelectedFinishes] = useState([]);
   const [val, setVal] = useState('');
 
@@ -21,6 +20,10 @@ export default function PostForm({ existing, onSave }) {
       setImageUrl(existing.imageUrl || '');
       setSection(existing.section || '');
       setLink(existing.link || '');
+      setText(existing.text || '');
+      setChainDescription(existing.chainDescription || '');
+      setSelectedFinishes(existing.finishes || []);
+      setVal(existing.value || '');
     }
   }, [existing]);
 
@@ -87,9 +90,11 @@ export default function PostForm({ existing, onSave }) {
   return (
     <>
     <form onSubmit={handleSubmit} className="addCard">
-      <h2>Add A Product</h2>
+      <h2>{existing?.id ? 'Update Card' : 'Create A Card'}</h2>
 
-      <h2>What Would You like to Add?</h2>
+      {!existing?.id && (<h2>What Would You like to Add?</h2>)}
+      
+      <div style={{display: 'flex'}}>
       <select className='selectOption' value={addSection} onChange={(e) => setAddSection(e.target.value)}>
         <option value=''>Select</option>
         <option value='1'>Canopy</option>
@@ -98,6 +103,11 @@ export default function PostForm({ existing, onSave }) {
         <option value='4'>Fitter Profile</option>
         <option value='5'>Finish</option>
       </select>
+
+      {existing?.id && (
+        <button className='escBtn' onClick={() => {setAddSection('')}}>Exit Editing</button>
+      )}
+      </div>
 
       {addSection === '1' && (
         <>
