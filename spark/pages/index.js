@@ -48,12 +48,17 @@ export default function Home() {
     document.querySelectorAll('.cardInfoWrapper')
     .forEach(element => {
     // element.style.display = detailsView ? 'none' : 'flex';
-    element.style.height = detailsView ? '0px' : '5vh';
+    element.style.height = detailsView ? '0px' : '2em';
     });
 
     document.querySelectorAll('.cardImg')
     .forEach(element => {
-      element.style.height = detailsView ? '25vh' : '20vh';
+      element.style.height = detailsView ? '15em' : '13em';
+    });
+
+    document.querySelectorAll('.cardText').forEach(element => {
+      element.style.fontSize = detailsView ? '3em' : '3em';
+      element.style.height = detailsView ? '1em' : '1em';
     });
   }
 

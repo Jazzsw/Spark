@@ -11,12 +11,15 @@ body{
     margin: 0;
     padding: 0;
     background-color: #1c1917;
+    
+    /* background: #44403c; */
+    /* background: radial-gradient(ellipse closest-corner at center, #525252 0%, #1e1d1b 50%); */
 }
 
 .title{
     font-family: "Michroma", sans-serif;
     font-size: 2.5em;
-    color: #eee;
+    color: #e3e6e8;
     position: absolute;
     left: 2em;
     top: -0.3em;
@@ -47,10 +50,13 @@ body{
   overflow-x: scroll;
   overflow-y: hidden;
   width: 98%;
-  height: 33vh;
-  /* border-top: 1px solid #333;
-  padding-top: 0px;
-  margin-top: 8px; */
+  height: 17em;
+  margin-left: 2em;
+}
+
+.section.textSection {
+  height: 7em;
+
 }
 
 
@@ -73,12 +79,13 @@ body{
 }
 
 .card {
-    border: .5px solid #eee;
+    /* border: .5px solid #e3e6e8; */
+    background-color: #292827;
     padding: 1vh;
     border-radius: 8px;
     margin: 3vh;
-    height: 25vh;
-    width: 25vh;
+    height: 15em;
+    width: 15em;
     transition: all 0.2s ease-in-out;
     margin: auto 1vw;
     overflow: visible;
@@ -86,22 +93,42 @@ body{
 
     display: inline-block;
     transform-origin: 50% 60%;
+
+    /* border-image-slice: 1; */
 }
+
 .card:hover {
     transform: scale(1.02);
     transition: all 0.2s ease-in-out;
 }
-
+.card.textCard{
+    height: 5em;
+    width: 18em;
+    color: #e3e6e8;
+    justify-content: center;
+    transitio: all 0.2s ease-in-out;
+}
 /* .card:nth-child(3n)  { animation-delay: 0.05s; }
 .card:nth-child(4n)  { animation-delay: 0.12s; }
 .card:nth-child(5n)  { animation-delay: 0.18s; } */
 
 .cardImg{
-    height: 25vh;
-    width: 25vh;
+    height: 15em;
+    width: 15em;
     object-fit: cover;
     transition: height 0.5s ease-in-out;
     /* border-radius: 8px; */
+}
+.cardText{
+    font-family: "Michroma", sans-serif;
+    font-size: 3em;
+    height: 1em;
+    text-wrap: nowrap;
+    margin: auto;
+    /* padding: 16px; */
+    display: flex;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
 }
 
 .cardDisc {
@@ -113,7 +140,7 @@ body{
 .addCard {
     background-color: #131313a8;
     border-bottom: 1px solid #333;
-    color: #eee;
+    color: #e3e6e8;
     padding: 1.5vh;
     margin: 2em auto;
     height: 100%;
@@ -125,7 +152,7 @@ body{
     flex-direction: column;
     align-items: center;
     border-radius: 8px;
-    /* box-shadow: #eeeeee14 0px 0px 20px; */
+    /* box-shadow: #e3e6e8eee14 0px 0px 20px; */
 }
 #priceInput {
     width: 35%;
@@ -231,7 +258,7 @@ body{
 }
 .cardDelete:hover {
     /* background-color: #ff4d4d;
-    color: #eee;
+    color: #e3e6e8;
     width: 100%;
     height: 100%;
     position: fixed;
@@ -248,7 +275,7 @@ body{
 
 .editButton{
     background-color: #1c1917;
-    color: #eee;
+    color: #e3e6e8;
     padding: 8px 8px;
     border: none;
     z-index: 10;
@@ -263,7 +290,7 @@ body{
 }
 .editButton:hover {
     scale: 1.05;
-    border: 1px dashed #eee;
+    border: 1px dashed #e3e6e8;
 }
 
 
@@ -295,12 +322,12 @@ body{
     cursor: pointer;
     transition: background-color 0.2s ease-in;
     margin: auto 1px;
-    height: 5vh;
+    height: 2em;
     font-size: 1em;
 }
 
 .linkButton:hover {
-    background-color: #eee;
+    background-color: #e3e6e8;
     color: #1c1917;
 }
 
@@ -319,7 +346,7 @@ body{
 
 }
 .toggleDetailsButton:hover {
-    background-color: #eee;
+    background-color: #e3e6e8;
     color: #1c1917; 
 }
 
@@ -359,7 +386,7 @@ body{
 
 .adminLogoutButton{
     background-color: #1c1917;
-    color: #eee;
+    color: #e3e6e8;
     padding: 8px 16px;
     border: 1px solid #ff4d4d;
     border-radius: 4px;
@@ -376,8 +403,9 @@ body{
 }
 
 .sectionTitle {
-    color: #eee;
-    /* font-size: 1.5vw; */
+    font-weight: 100;
+    color: #e3e6e8;
+    margin-left: 2em;
     margin-top: 1vw;
     margin-bottom: 0%;
 }
@@ -391,18 +419,18 @@ body{
 }
 
 .totalTitle{
-    color: #eee;
+    color: #e3e6e8;
     font-size: 1.5em;
     margin-right: 0.5em;
 }
 
 .totalPrice{
-    color: #eee;
+    color: #e3e6e8;
     font-size: 2.5em;
 }
 
 .labourFeeTitle{
-    color: #eee;
+    color: #e3e6e8;
     margin-right: 0.5em;
 }
 
@@ -445,10 +473,22 @@ body{
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+    /* box-shadow: 0 0 12px rgba(0, 0, 0, 0.3); */
 }
+.stickyFooterShadow{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 9em;
+    background-color: #1c1917; 
+
+    z-index: 99;
+}
+ 
 
 .inputFee {
-    border: 0.5px solid #eee;
+    border: 0.5px solid #e3e6e8;
     padding: 8px;
     border-radius: 4px;
     margin: 6px 5px;
@@ -463,7 +503,7 @@ body{
 }
 
 .addCardButton{
-    border: .5px solid #eee;
+    border: .5px solid #e3e6e8;
     padding: 1vh;
     /* border-radius: 8px; */
     margin: 3vh;
@@ -516,7 +556,7 @@ body{
 }
 
 .loginBlock{
-    /* border: #eee solid 0.5px; */
+    /* border: #e3e6e8 solid 0.5px; */
     border-radius: 8px;
     padding: 8px;
     display: flex;
@@ -529,7 +569,7 @@ body{
 }
 
 .loginInput{
-    /* border: 0.5px solid #eee; */
+    /* border: 0.5px solid #e3e6e8; */
     margin: 8px 8px;
     border: none;
     padding: 8px;
@@ -559,12 +599,78 @@ body{
 }
 
 .adminLoginText {
-    color: #eee;
+    color: #e3e6e8;
     font-size: 1.5em;
     margin-bottom: 0.5em;
     margin-top: 0.5em;
 }
 
+.customInputBox{
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #2C2C2C;
+    color: #fff;
+    width: 80%;
+    height: 10%;
+    
+}
+.customInputBox:focus {
+  outline: none;
+}
+
+.addTitle{
+    color: #e3e6e8;
+    font-size: 1.2em;
+    margin-bottom: 8px;
+}
+
+.connectionSelector {
+    margin-bottom: 16px;
+    display: flex;
+    margin-left : 2em;
+    height: 8em;
+    border: 1px;
+}
+
+.connectionButton{
+    display: flex;
+    background-color: #292827;
+    color: #e3e6e8;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    margin: 8px;
+    font-size: 1em;
+    height: 4em;
+    width: 18em;
+    font-size: 1.5em;
+    margin-top: 0.5em;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.connectionButton.active {
+    border: 2px solid #3995E6;
+    background-color: rgba(57, 149, 230, 0.1);
+    transform: scale(1.02);
+    transition: all 0.2s ease-in-out;
+}
+.connectionButton:hover {
+    transform: scale(1.02);
+}
+.connectionLabel{
+    margin: auto;
+    font-family: "Michroma", sans-serif;
+}
+
+
+#section-4{
+    display: none;
+}
+#section-4-title{
+    display: none;
+}
 
 
 @media only screen and (max-width: 600px) {
@@ -572,8 +678,15 @@ body{
         display: none;
     }
     .section {
-        height: 30vh;
-        width: 105%;
+        height: 18em;
+        width: 24em;
+        margin-left: 0px;
+    }
+    .section.textSection {
+        height: 9em;
+    }
+    .sectionTitle{
+        margin-left: 0px;
     }
     .addCard{
         width: 87vw;
@@ -613,27 +726,23 @@ body{
     .adminLogoutButton {
         margin-right: 0;
     }
+    .connectionButton{
+        height: auto;
+        width: 10em;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+    .connectionLabel{
+        font-size: 1em;
+    }
+    .connectionSelector{
+        display: flex;
+        margin-left: 0px;
+        height: 8em;
+        width: 24em;
+    }
     
     
-}
-
-
-.customInputBox{
-    border: none;
-    padding: 8px;
-    border-radius: 4px;
-    background-color: #2C2C2C;
-    color: #fff;
-    width: 80%;
-    height: 10%;
-    
-}
-.customInputBox:focus {
-  outline: none;
-}
-
-.addTitle{
-    color: #eee;
-    font-size: 1.2em;
-    margin-bottom: 8px;
 }

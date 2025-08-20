@@ -3,7 +3,6 @@ import { act, useEffect, useState } from 'react';
 import { db } from '../firebase/firebaseClient';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import PostForm from '../components/PostForm';
-import CustomAdd from '../components/CustomAdd';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Section from "../components/Section";
 
@@ -15,6 +14,9 @@ export default function Board() {
   const [labourFee, setLabourFee] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [CustomValue, setCustomValue] = useState({});
+  const [connection, setConnection] = useState('Connection');
+  const [showFitter, setShowFitter] = useState(false);
+  const [sec4Array, setSec4Array] = useState([]);
 
 
 
@@ -53,10 +55,20 @@ export default function Board() {
     window.open(link, '_blank');
   };
 
- const totalPrice = 
-  (parseFloat(posts.find(post => post.section === 1 && activeCards[1] === post.id)?.description) || 0) +
-  (parseFloat(posts.find(post => post.section === 2 && activeCards[2] === post.id)?.description) || 0) +
-  (parseFloat(posts.find(post => post.section === 3 && activeCards[3] === post.id)?.description) || 0) +
+  const getPrice = (post, section) => {
+  if (!post) return 0;
+  if (connection === "Rod") {
+    return parseFloat(post.description) || 0;
+  } else if (connection === "Chain") {
+    return parseFloat(post.chainDescription) || 0;
+  }
+  return 0;
+};
+
+const totalPrice =
+  getPrice(posts.find(post => post.section === 1 && activeCards[1] === post.id), 1) +
+  getPrice(posts.find(post => post.section === 2 && activeCards[2] === post.id), 2) +
+  getPrice(posts.find(post => post.section === 3 && activeCards[3] === post.id), 3) +
   (parseFloat(labourFee) || 0) +
   (activeCards[1] === 'custom1' ? (parseFloat(CustomValue[1]) || 0) : 0) +
   (activeCards[2] === 'custom2' ? (parseFloat(CustomValue[2]) || 0) : 0) +
@@ -76,6 +88,12 @@ export default function Board() {
             }}
           />
         )}
+
+        <h2 className='sectionTitle'>Connection Type</h2>
+        <div className='connectionSelector'>  
+          <div className={`connectionButton ${connection === 'Rod' ? 'active' : ''}`} onClick={() => connection==='Rod' ? setConnection('Connection') : setConnection('Rod')}><h2 className='connectionLabel'>Rod</h2></div>
+          <div className={`connectionButton ${connection === 'Chain' ? 'active' : ''}`} onClick={() => connection==='Chain' ? setConnection('Connection') : setConnection('Chain')}><h2 className='connectionLabel'>Chain</h2></div>
+        </div>
       
         <Section
         sectionId={1}
@@ -89,11 +107,17 @@ export default function Board() {
         onDelete={handleDelete}
         onEdit={(post) => setSelectedPost(post)}
         onLinkClick={handleLinkClick}
+        type="image"
+        hasCustom={true}
+        connection={connection}
+        showFitter={showFitter}
+        setShowFitter={setShowFitter}
+        setSec4Array={setSec4Array}
       />
 
       <Section
         sectionId={2}
-        title="Section 2"
+        title={`${connection} Length`}
         posts={posts.filter((p) => p.section === 2)}
         activeCards={activeCards}
         setActiveCards={setActiveCards}
@@ -103,11 +127,17 @@ export default function Board() {
         onDelete={handleDelete}
         onEdit={(post) => setSelectedPost(post)}
         onLinkClick={handleLinkClick}
+        type="text"
+        hasCustom={true}
+        connection={connection}
+        showFitter={showFitter}
+        setShowFitter={setShowFitter}
+        setSec4Array={setSec4Array}
       />
-
+      
       <Section
         sectionId={3}
-        title="Section 3"
+        title="Fitter Size"
         posts={posts.filter((p) => p.section === 3)}
         activeCards={activeCards}
         setActiveCards={setActiveCards}
@@ -117,6 +147,52 @@ export default function Board() {
         onDelete={handleDelete}
         onEdit={(post) => setSelectedPost(post)}
         onLinkClick={handleLinkClick}
+        type="text"
+        hasCustom={true}
+        connection={connection}
+        showFitter={showFitter}
+        setShowFitter={setShowFitter}
+        setSec4Array={setSec4Array}
+      />
+
+      <Section
+        sectionId={4}
+        title="Fitter Profile"
+        posts={posts.filter((p) => p.section === 4 && sec4Array.includes(p.profileID))}
+        activeCards={activeCards}
+        setActiveCards={setActiveCards}
+        CustomValue={CustomValue}
+        setCustomValue={setCustomValue}
+        isAdmin={isAdmin}
+        onDelete={handleDelete}
+        onEdit={(post) => setSelectedPost(post)}
+        onLinkClick={handleLinkClick}
+        type="image"
+        hasCustom={true}
+        connection={connection}
+        showFitter={showFitter}
+        setShowFitter={setShowFitter}
+        setSec4Array={setSec4Array}
+      />
+
+      <Section
+        sectionId={5}
+        title="Finnish"
+        posts={posts.filter((p) => p.section === 5)}
+        activeCards={activeCards}
+        setActiveCards={setActiveCards}
+        CustomValue={CustomValue}
+        setCustomValue={setCustomValue}
+        isAdmin={isAdmin}
+        onDelete={handleDelete}
+        onEdit={(post) => setSelectedPost(post)}
+        onLinkClick={handleLinkClick}
+        type="Text"
+        hasCustom={true}
+        connection={connection}
+        showFitter={showFitter}
+        setShowFitter={setShowFitter}
+        setSec4Array={setSec4Array}
       />
       
     { !isAdmin && (
@@ -127,6 +203,7 @@ export default function Board() {
           onChange={(e) => setLabourFee(e.target.value)} />
       </div>
 
+    <div className='stickyFooterShadow'></div>
 
     <div className='stickyFooter'>
       <div className='resetContainer'>
