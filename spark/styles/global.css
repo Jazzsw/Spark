@@ -188,14 +188,6 @@ body{
   outline: none;
 }
 
-.addText{
-    color: lightgray;
-    font-size: 1.2em;
-    text-wrap: nowrap;
-    margin-left: 16px;
-    margin-right: 8px;
-    margin-top: 8px;
-}
 
 .pairText{
     display: flex;
@@ -761,3 +753,39 @@ body{
 .section.fitterSection {
     display: none;
 } */
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: auto;
+}
+
+.addContainer{
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.addText{
+    color: lightgray;
+    font-size: 1.2em;
+    margin-top: 8px;
+}
+.addSection{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: auto;
+}
+
+.selectOption{
+    background-color: #1c1917;
+    color: #e3e6e8;
+    border-radius: 8px;
+    font-size: 1.3em;
+    margin: 16px;
+}
+.selectOption:focus{
+    outline: none;
+}

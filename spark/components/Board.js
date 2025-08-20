@@ -89,7 +89,7 @@ const totalPrice =
           />
         )}
 
-        <h2 className='sectionTitle'>Connection Type</h2>
+        <h2 className='sectionTitle' style={{ display: isAdmin ? "" : "flex" }}>Connection Type</h2>
         <div className='connectionSelector'>  
           <div className={`connectionButton ${connection === 'Rod' ? 'active' : ''}`} onClick={() => connection==='Rod' ? setConnection('Connection') : setConnection('Rod')}><h2 className='connectionLabel'>Rod</h2></div>
           <div className={`connectionButton ${connection === 'Chain' ? 'active' : ''}`} onClick={() => connection==='Chain' ? setConnection('Connection') : setConnection('Chain')}><h2 className='connectionLabel'>Chain</h2></div>
