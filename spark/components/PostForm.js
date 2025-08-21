@@ -3,7 +3,7 @@ import { db } from '../firebase/firebaseClient';
 import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { Board, setShowForm } from '../components/Board';
 
-export default function PostForm({ existing, onSave, addSection, setAddSection, row3 }) {
+export default function PostForm({ existing, onSave, addSection, setAddSection, row3, finishes}) {
   const [description, setDescription] = useState('');
   const [chainDescription, setChainDescription] = useState('');
   const [text, setText] = useState('');
@@ -77,17 +77,15 @@ export default function PostForm({ existing, onSave, addSection, setAddSection, 
     setLoading(false);
   };
 
-  const finishes = [
-    {name: 'Brass', val: 'B'},
-    {name: 'Polished Brass', val: 'PB'},
-    {name: 'Satin Brass', val: 'SB'},
-    {name: 'Antique Brass', val: 'AB'},
-    {name: 'Polished Nickel', val: 'PN'},
-    {name: 'Satin Nickel', val: 'SN'},
-    {name: 'Black', val: 'BK'},
-  ];
-
-
+  // const finishes = [
+  //   {name: 'Brass', val: 'B'},
+  //   {name: 'Polished Brass', val: 'PB'},
+  //   {name: 'Satin Brass', val: 'SB'},
+  //   {name: 'Antique Brass', val: 'AB'},
+  //   {name: 'Polished Nickel', val: 'PN'},
+  //   {name: 'Satin Nickel', val: 'SN'},
+  //   {name: 'Black', val: 'BK'},
+  // ];
 
   return (
     <>
@@ -126,22 +124,22 @@ export default function PostForm({ existing, onSave, addSection, setAddSection, 
               <div className='inputButtons'>
                 <h2 className='addText'>Available Finishes</h2>
                 {finishes.map((fin) => (
-                  <div key={fin.val} className="finishOption">
+                  <div key={fin.value} className="finishOption">
                     <input
                       type="checkbox"
-                      id={`finish-${fin.val}`}
+                      id={`finish-${fin.value}`}
                       name="finishes"
-                      value={fin.val}
-                      checked={selectedFinishes.includes(fin.val)}
+                      value={fin.value}
+                      checked={selectedFinishes.includes(fin.value)}
                       onChange={(e) => {
                         if (e.target.checked) {
-                          setSelectedFinishes([...selectedFinishes, fin.val]);
+                          setSelectedFinishes([...selectedFinishes, fin.value]);
                         } else {
-                          setSelectedFinishes(selectedFinishes.filter(f => f !== fin.val));
+                          setSelectedFinishes(selectedFinishes.filter(f => f !== fin.value));
                         }
                       }}
                     />
-                    <label htmlFor={`finish-${fin.val}`}>{fin.name}</label>
+                    <label htmlFor={`finish-${fin.value}`}>{fin.text}</label>
                   </div>
                 ))}
               </div>
@@ -170,22 +168,22 @@ export default function PostForm({ existing, onSave, addSection, setAddSection, 
               <div className='inputButtons'>
                 <h2 className='addText'>Available Finishes</h2>
                 {finishes.map((fin) => (
-                  <div key={fin.val} className="finishOption">
+                  <div key={fin.value} className="finishOption">
                     <input
                       type="checkbox"
-                      id={`finish-${fin.val}`}
+                      id={`finish-${fin.value}`}
                       name="finishes"
-                      value={fin.val}
-                      checked={selectedFinishes.includes(fin.val)}
+                      value={fin.value}
+                      checked={selectedFinishes.includes(fin.value)}
                       onChange={(e) => {
                         if (e.target.checked) {
-                          setSelectedFinishes([...selectedFinishes, fin.val]);
+                          setSelectedFinishes([...selectedFinishes, fin.value]);
                         } else {
-                          setSelectedFinishes(selectedFinishes.filter(f => f !== fin.val));
+                          setSelectedFinishes(selectedFinishes.filter(f => f !== fin.value));
                         }
                       }}
                     />
-                    <label htmlFor={`finish-${fin.val}`}>{fin.name}</label>
+                    <label htmlFor={`finish-${fin.value}`}>{fin.text}</label>
                   </div>
                 ))}
               </div>
@@ -244,63 +242,6 @@ export default function PostForm({ existing, onSave, addSection, setAddSection, 
         </>
       )}
 
-      {/* <div className="addCol1">
-        <div className='pairText'>
-        <h2 className='addText'>URL for tile Image</h2>
-        <input
-          type="text"
-          placeholder="URL"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-          className="inputBox"
-          id = 'urlInput'
-        />
-        </div>
-
-      <div className='pairText'>
-      <h2 className='addText'>Price</h2>
-      <input
-        placeholder="$"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        className="inputBox"
-        id = 'priceInput'
-      />
-      </div>
-      </div>
-
-    <div className="addCol2">
-      <div className='pairText'>
-      <h2 className='addText'>Link to Item</h2>
-      <input
-        placeholder="Link to Item"
-        value={link}
-        onChange={(e) => setLink(e.target.value)}
-        className="inputBox"
-      />
-      </div>
-
-      <div className='pairText'>
-        <h2 className='addText'>Row</h2>
-      <input
-        placeholder="(1, 2, or 3)"
-        value={section}
-        onChange={(e) => setSection(e.target.value)}
-        className="inputBox"
-        id = 'rowInput'
-      />
-      </div>
-      </div>
-
-      <div className="addButtonContainer">
-      <button
-        type="submit"
-        disabled={loading}
-        className="submitButton"
-      >
-        {loading ? 'Saving...' : existing?.id ? 'Update Card' : 'Create Card'}
-      </button>
-      </div> */}
     </form>
 
     </>
