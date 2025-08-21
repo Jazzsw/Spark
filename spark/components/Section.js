@@ -38,6 +38,7 @@ export default function Section({
             setShowFitter(true);
             document.getElementById('section-4').style.display = "flex";
             document.getElementById('section-4-title').style.display = "flex";
+            document.getElementById('section-4-title').style.flexDirection = "column";
         }
     }
 };
