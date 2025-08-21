@@ -57,8 +57,13 @@ export default function Home() {
     });
 
     document.querySelectorAll('.cardText').forEach(element => {
-      element.style.fontSize = detailsView ? '3em' : '3em';
-      element.style.height = detailsView ? '1em' : '1em';
+      element.style.fontSize = detailsView ? '' : '1.8em';
+      element.style.height = detailsView ? '' : '1.5em';
+    });
+    document.querySelectorAll('.cardText.finishText').forEach(element => {  
+      element.style.fontSize = detailsView ? '' : '1.2em';
+      element.style.textAlign = detailsView ? '' : 'none';
+      element.style.height = detailsView ? '' : '1.5em';
     });
   }
 

@@ -56,7 +56,7 @@ export default function Section({
             {type === "image" ? (
               <img src={post.imageUrl} alt="" className="cardImg" />
             ) : (
-              <div className={`cardText ${sectionId === 5 ? "finishText" : ""}`}>{post.text}</div>
+              <div id="sec5" className={`cardText ${sectionId === 5 ? "finishText" : ""}`}>{post.text}</div>
             )}
 
             <div className="cardInfoWrapper">
