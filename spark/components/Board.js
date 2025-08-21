@@ -6,6 +6,7 @@ import PostForm from '../components/PostForm';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Section from "../components/Section";
 import ChainSection from "../components/ChainSection";
+import FinishSection from "../components/FinishSection";
 
 export default function Board() {
   const [posts, setPosts] = useState([]);
@@ -18,8 +19,10 @@ export default function Board() {
   const [connection, setConnection] = useState('Connection');
   const [showFitter, setShowFitter] = useState(false);
   const [sec4Array, setSec4Array] = useState([]);
+  const [finishesArray, setFinishesArray] = useState([]);
 
   const [addSection, setAddSection] = useState('');
+
 
 
 
@@ -72,11 +75,51 @@ const totalPrice =
   getPrice(posts.find(post => post.section === 1 && activeCards[1] === post.id), 1) +
   getPrice(posts.find(post => post.section === 2 && activeCards[2] === post.id), 2) +
   getPrice(posts.find(post => post.section === 3 && activeCards[3] === post.id), 3) +
+  getPrice(posts.find(post => post.section === 4 && activeCards[4] === post.id), 4) +
+  getPrice(posts.find(post => post.section === 5 && activeCards[5] === post.id), 5) +
   (parseFloat(labourFee) || 0) +
   (activeCards[1] === 'custom1' ? (parseFloat(CustomValue[1]) || 0) : 0) +
   (activeCards[2] === 'custom2' ? (parseFloat(CustomValue[2]) || 0) : 0) +
   (activeCards[3] === 'custom3' ? (parseFloat(CustomValue[3]) || 0) : 0) +
-  (activeCards[6] === 'customBrass2' ? (activeCards[7] ? (parseFloat(CustomValue[7]) || 0) : 0) : 0);
+  (activeCards[4] === 'custom4' ? (parseFloat(CustomValue[4]) || 0) : 0) +
+  (activeCards[5] === 'custom5' ? (parseFloat(CustomValue[5]) || 0) : 0) +
+  (activeCards[6] === 'customBrass2' ? (activeCards[7] ? (parseFloat(CustomValue[7]) || 0) : 0) : 0)+
+  (connection === 'Chain' ? parseFloat('50') || 0 : connection === 'Rod' ? parseFloat('75') || 0 : 0);
+
+  // const selectedFinishes = Array.from(new Set(
+  // Object.entries(activeCards)
+  //   .map(([section, postId]) => 
+  //     posts.find(post => post.section === Number(section) && post.id === postId)
+  //   )
+  //   .filter(Boolean)
+  //   .flatMap(post => Array.isArray(post.finishes) ? post.finishes : [])
+  // ));
+
+  // Grab all finishes from Section 5
+  const allFinishes = posts
+    .filter(p => p.section === 5)
+    .flatMap(p => p.value ? [p.value] : [])
+    .filter(Boolean);
+
+  const uniqueFinishes = Array.from(new Set(allFinishes));
+
+  // Grab all selected posts
+  const selectedPosts = Object.entries(activeCards)
+    .map(([section, postId]) =>
+      posts.find(post => post.section === Number(section) && post.id === postId)
+    )
+    .filter(Boolean)
+    .filter(post => (post.section !== 5 && post.section !== 3));
+
+  // Build the map
+  const finishExclusionsMap = uniqueFinishes.reduce((acc, finish) => {
+    acc[finish] = selectedPosts
+      .filter(post => !Array.isArray(post.finishes) || !post.finishes.includes(finish))
+      .map(post => post.id);
+    return acc;
+  }, {});
+
+  console.log("finishMAP" + JSON.stringify(finishExclusionsMap));
 
 
   return (
@@ -227,7 +270,8 @@ const totalPrice =
         setAddSection={setAddSection}
       />
 
-      <Section
+      {!(activeCards[6] === 'customBrass2') && (
+      <FinishSection
         sectionId={5}
         title="Finish"
         posts={posts.filter((p) => p.section === 5)}
@@ -246,7 +290,12 @@ const totalPrice =
         setShowFitter={setShowFitter}
         setSec4Array={setSec4Array}
         setAddSection={setAddSection}
+        // selectedFinishes={selectedFinishes}
+        finishExclusionsMap={finishExclusionsMap}
+
+        handleCardClick={handleCardClick}
       />
+      )}
       
     { !isAdmin && (
       <>

@@ -59,6 +59,13 @@ body{
 }
 
 
+.card.selectedFinish {
+  border: 2px solid #ff4d4d;
+  background-color: rgba(255, 77, 77, 0.1);
+  transform: scale(1.02);
+  transition: all 0.2s ease-in-out;
+}
+
 
 @keyframes shake {
   0%   { transform: rotate(-1.6deg) translateY(0); }

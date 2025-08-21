@@ -1,4 +1,4 @@
-export default function Section({
+export default function FinishSection({
   sectionId,
   title,
   posts,
@@ -17,42 +17,22 @@ export default function Section({
   setShowFitter,
     setSec4Array,
     setAddSection,
-}) {
-  const handleCardClick = (postId) => {
-    const isCurrentlyActive = activeCards[sectionId] === postId;
-    const newActive = isCurrentlyActive ? null : postId;
+    selectedFinishes,
+    handleCardClick,
+    finishExclusionsMap,
+}){
 
-    setActiveCards((prev) => ({
-      ...prev,
-      [sectionId]: prev[sectionId] === postId ? null : postId,
-    }));
-
-    if (sectionId === 3) {
-        if (newActive === null) {
-            setShowFitter(false);
-            document.getElementById('section-4').style.display = "none";
-            document.getElementById('section-4-title').style.display = "none";
-        } else {
-            const selectedPost = posts.find(post => post.id === postId);
-            setSec4Array(selectedPost?.children || []);
-            setShowFitter(true);
-            document.getElementById('section-4').style.display = "flex";
-            document.getElementById('section-4-title').style.display = "flex";
-        }
-    }
-};
-
-  return (
-    <>
-      <h2 id={`section-${sectionId}-title`} className={`sectionTitle ${showFitter ? "fitterTitle" : ""}`} style={{ display: isAdmin ? "flex" : "" }}>{title}</h2>
-      <div id={`section-${sectionId}`} className={`section ${type === "image" ? "imageSection" : "textSection"} ${showFitter ? "fitterSection" : ""}`} style={{ display: isAdmin ? "flex" : "" }}>
-        {posts.map((post) => (
+    return(
+        <>
+        <h2 id={`section-${sectionId}-title`} className={`sectionTitle ${showFitter ? "fitterTitle" : ""}`} style={{ display: isAdmin ? "flex" : "" }}>{title}</h2>
+        <div id={`section-${sectionId}`} className={`section ${type === "image" ? "imageSection" : "textSection"} ${showFitter ? "fitterSection" : ""}`} style={{ display: isAdmin ? "flex" : "" }}>
+        
+        {posts.map((post) => ( 
           <div
             key={post.id}
-            className={`card ${activeCards[sectionId] === post.id ? "active" : ""} ${type === "image" ? "imageCard" : "textCard"}`}
-            onClick={() => handleCardClick(post.id)}
+            className={`card ${activeCards[sectionId] === post.id ? "active" : ""} ${type === "image" ? "imageCard" : "textCard"} ${finishExclusionsMap[post.value].length == 0 ? "" : "selectedFinish"}`}
+            onClick={() => handleCardClick(sectionId, post.id)}
           >
-
             {type === "image" ? (
               <img src={post.imageUrl} alt="" className="cardImg" />
             ) : (
@@ -105,7 +85,7 @@ export default function Section({
 
         {hasCustom && (
             <div className={`card ${activeCards[sectionId] === `custom${sectionId}` ? "active" : ""} ${type === "image" ? "imageCard" : "textCard"}`} key={`custom${sectionId}`}
-            onClick={() => handleCardClick(`custom${sectionId}`)}
+            onClick={() => handleCardClick(sectionId,`custom${sectionId}`)}
             >
 
             <h2 className="addTitle">Custom Price</h2>
@@ -123,4 +103,5 @@ export default function Section({
       </div>
     </>
   );
+
 }

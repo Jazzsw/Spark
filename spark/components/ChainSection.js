@@ -27,7 +27,7 @@ export default function ChainSection({
                 <h2 className="sectionTitle">Chain Type</h2>
                 <div className={`section ${type === "image" ? "imageSection" : "textSection"}`} style={{ display: isAdmin ? "flex" : "" }}>
                 <div className={`card ${activeCards[sectionId] === 'customBrass1' ? "active" : ""} ${type === "image" ? "imageCard" : "textCard"}`} key={'customBrass1'} onClick={() => handleCardClick(sectionId, 'customBrass1')} style={{width: '50vw'}}>
-                    <h2 className="cardText">Brass Finished Iron</h2>
+                    <h2 className="cardText">Brass Finished</h2>
                 </div>
                 <div className={`card ${activeCards[sectionId] === 'customBrass2' ? "active" : ""} ${type === "image" ? "imageCard" : "textCard"}`} key={'customBrass2'} onClick={() => handleCardClick(sectionId, 'customBrass2')} style={{width: '50vw'}}>
                     <h2 className="cardText">Solid Brass</h2>
