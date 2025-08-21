@@ -79,7 +79,7 @@ export default function Section({
                     e.stopPropagation();
                     onDelete(post.id);
                   }}
-                  className={`cardDelete ${type === "text" ? "textDelete" : ""}`}
+                  className={`cardDelete ${type === "text" ? "textDelete" : ""} ${sectionId === 5 ? "finishDelete" : ""}`}
                 >
                   Delete
                 </button>
@@ -89,7 +89,7 @@ export default function Section({
                     setAddSection(sectionId.toString() || '');
                     onEdit(post);
                   }}
-                  className={`editButton ${type === "text" ? "textEditButton" : ""}`}
+                  className={`editButton ${type === "text" ? "textEditButton" : ""} ${sectionId === 5 ? "finishEditButton" : ""}`}
                 >
                   Edit
                 </button>

@@ -134,8 +134,18 @@ body{
     font-size: 1.3em;
     margin: auto;
     margin-top: 1em;
-    /* text-align: center; */
+    text-align: center;
 }
+
+.editButton.finishEditButton{
+    top: 1.5em;
+    height: 2.5em;
+}
+.cardDelete.finishDelete{
+    top: 1.5em;
+    height: 2.5em;
+}
+
 
 .cardDisc {
     color: #fff;
@@ -255,9 +265,9 @@ body{
     transition: left 0.26s linear, width 0.25s linear, height 0.25s linear, font-size 0.25s linear;
 }
 
-.cardDelete.textDelete {
+.cardDelete.textDelete{
     left: -0.6em;
-    top: 1.7em;
+    top: 0.6em;
     height: 2.5em;
 }
 
@@ -289,7 +299,7 @@ body{
 }
 .editButton.textEditButton {
     left: -0.6em;
-    top: 1.7em;
+    top: 0.6em;
     height: 2.5em;
 }
 

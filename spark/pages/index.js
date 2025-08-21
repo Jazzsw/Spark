@@ -65,6 +65,18 @@ export default function Home() {
       element.style.textAlign = detailsView ? '' : 'none';
       element.style.height = detailsView ? '' : '1.5em';
     });
+    document.querySelectorAll('.cardDelete.textDelete').forEach(element => {
+      element.style.top = detailsView ? '' : '-1.3em';
+    });
+    document.querySelectorAll('.editButton.textEditButton').forEach(element => {
+      element.style.top = detailsView ? '' : '-1.3em';
+    });
+    document.querySelectorAll('.cardDelete.finishDelete').forEach(element => {
+      element.style.top = detailsView ? '' : '-1.3em';
+    });
+    document.querySelectorAll('.editButton.finishEditButton').forEach(element => {
+      element.style.top = detailsView ? '' : '-1.3em';
+    });
   }
 
   const listenForEnter = () => {

@@ -67,7 +67,6 @@ export default function PostForm({ existing, onSave, addSection, setAddSection, 
                 where('text', '==', parentSize)
               );
               const newSnap = await getDocs(newParentQ);
-              alert("adding to new parent:", newSnap);
               newSnap.forEach(async (docSnap) => {
                 const newParentRef = doc(db, 'posts', docSnap.id);
                 await updateDoc(newParentRef, {

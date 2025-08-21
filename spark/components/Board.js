@@ -124,7 +124,7 @@ const totalPrice =
 
       <Section
         sectionId={2}
-        title={`${connection} Length`}
+        title={`${connection} Length ${connection === 'Rod' ? '(All rod is 3/4" dia)' : connection === 'Chain' ? '(Chain is 7 Gauge (3/16" thick) Elongated links (1" x 2-1/4")' : ''}`}
         posts={posts.filter((p) => p.section === 2).sort((a, b) => a.text.localeCompare(b.text))}
         activeCards={activeCards}
         setActiveCards={setActiveCards}
