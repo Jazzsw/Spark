@@ -98,6 +98,7 @@ export default function Section({
           </div>
         ))}
 
+
         {hasCustom && (
             <div className={`card ${activeCards[sectionId] === `custom${sectionId}` ? "active" : ""} ${type === "image" ? "imageCard" : "textCard"}`} key={`custom${sectionId}`}
             onClick={() => handleCardClick(`custom${sectionId}`)}

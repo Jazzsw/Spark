@@ -5,6 +5,7 @@ import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import PostForm from '../components/PostForm';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Section from "../components/Section";
+import ChainSection from "../components/ChainSection";
 
 export default function Board() {
   const [posts, setPosts] = useState([]);
@@ -74,7 +75,8 @@ const totalPrice =
   (parseFloat(labourFee) || 0) +
   (activeCards[1] === 'custom1' ? (parseFloat(CustomValue[1]) || 0) : 0) +
   (activeCards[2] === 'custom2' ? (parseFloat(CustomValue[2]) || 0) : 0) +
-  (activeCards[3] === 'custom3' ? (parseFloat(CustomValue[3]) || 0) : 0);
+  (activeCards[3] === 'custom3' ? (parseFloat(CustomValue[3]) || 0) : 0) +
+  (activeCards[6] === 'customBrass2' ? (activeCards[7] ? (parseFloat(CustomValue[7]) || 0) : 0) : 0);
 
 
   return (
@@ -122,26 +124,66 @@ const totalPrice =
         setAddSection={setAddSection}
       />
 
-      <Section
-        sectionId={2}
-        title={`${connection} Length ${connection === 'Rod' ? '(All rod is 3/4" dia)' : connection === 'Chain' ? '(Chain is 7 Gauge (3/16" thick) Elongated links (1" x 2-1/4")' : ''}`}
-        posts={posts.filter((p) => p.section === 2).sort((a, b) => a.text.localeCompare(b.text))}
-        activeCards={activeCards}
-        setActiveCards={setActiveCards}
-        CustomValue={CustomValue}
-        setCustomValue={setCustomValue}
-        isAdmin={isAdmin}
-        onDelete={handleDelete}
-        onEdit={(post) => setSelectedPost(post)}
-        onLinkClick={handleLinkClick}
-        type="text"
-        hasCustom={true}
-        connection={connection}
-        showFitter={showFitter}
-        setShowFitter={setShowFitter}
-        setSec4Array={setSec4Array}
-        setAddSection={setAddSection}
-      />
+      {connection === 'Chain' && (
+        <ChainSection
+          sectionId={6}
+          title={'Chain Type'}
+          activeCards={activeCards}
+          setActiveCards={setActiveCards}
+          CustomValue={CustomValue}
+          setCustomValue={setCustomValue}
+          isAdmin={isAdmin}
+          onDelete={handleDelete}
+          onEdit={(post) => setSelectedPost(post)}
+          onLinkClick={handleLinkClick}
+          type="text"
+          hasCustom={true}
+          handleCardClick={handleCardClick}
+        />
+      )}
+
+      {(activeCards[6] === 'customBrass1' || connection === 'Rod' || connection === 'Connection') && (
+        <Section
+          sectionId={2}
+          title={`${connection} Length ${connection === 'Rod' ? '(All rod is 3/4" dia)' : connection === 'Chain' ? '(Chain is 7 Gauge (3/16" thick) Elongated links (1" x 2-1/4")' : ''}`}
+          posts={posts.filter((p) => p.section === 2).sort((a, b) => a.text.localeCompare(b.text))}
+          activeCards={activeCards}
+          setActiveCards={setActiveCards}
+          CustomValue={CustomValue}
+          setCustomValue={setCustomValue}
+          isAdmin={isAdmin}
+          onDelete={handleDelete}
+          onEdit={(post) => setSelectedPost(post)}
+          onLinkClick={handleLinkClick}
+          type="text"
+          hasCustom={true}
+          connection={connection}
+          showFitter={showFitter}
+          setShowFitter={setShowFitter}
+          setSec4Array={setSec4Array}
+          setAddSection={setAddSection}
+        />
+      )}
+
+      {activeCards[6] === 'customBrass2' && (
+         <ChainSection
+          sectionId={7}
+          title={'Chain Finish (All Solid Brass Chains are 1/4" dia. 0-3\' length)'}
+          activeCards={activeCards}
+          setActiveCards={setActiveCards}
+          CustomValue={CustomValue}
+          setCustomValue={setCustomValue}
+          isAdmin={isAdmin}
+          onDelete={handleDelete}
+          onEdit={(post) => setSelectedPost(post)}
+          onLinkClick={handleLinkClick}
+          type="text"
+          hasCustom={true}
+          handleCardClick={handleCardClick}
+        />
+
+      )}
+      
       
       <Section
         sectionId={3}
@@ -162,7 +204,7 @@ const totalPrice =
         setShowFitter={setShowFitter}
         setSec4Array={setSec4Array}
         setAddSection={setAddSection}
-      />  
+      />
 
       <Section
         sectionId={4}
