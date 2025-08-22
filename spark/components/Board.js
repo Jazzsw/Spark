@@ -312,6 +312,7 @@ const totalPrice =
         <button className='resetButton' onClick={() => {
           setActiveCards({});
           setLabourFee('');
+          setConnection('Connection');
         }}>Reset</button>
       </div>
 
