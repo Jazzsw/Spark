@@ -58,6 +58,11 @@ body{
   height: 7em;
 }
 
+.section::-webkit-scrollbar{
+    background-color: transparent;
+    height: 1px;
+}
+
 
 .card.selectedFinish {
   border: 2px solid #ff4d4d;

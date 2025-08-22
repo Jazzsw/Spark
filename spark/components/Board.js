@@ -274,7 +274,7 @@ const totalPrice =
       <FinishSection
         sectionId={5}
         title="Finish"
-        posts={posts.filter((p) => p.section === 5)}
+        posts={posts.filter((p) => p.section === 5).sort((a, b) => a.description.localeCompare(b.description))}
         activeCards={activeCards}
         setActiveCards={setActiveCards}
         CustomValue={CustomValue}
