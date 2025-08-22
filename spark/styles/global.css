@@ -66,10 +66,13 @@ body{
 
 
 .card.selectedFinish {
-  border: 2px solid #ff4d4d;
+  /* border: 2px solid #ff4d4d; */
   background-color: rgba(255, 77, 77, 0.1);
-  transform: scale(1.02);
+  transform: scale(0.98);
   transition: all 0.2s ease-in-out;
+}
+.cardText.selectedFinishText {
+  color: #2C2C2C;
 }
 
 

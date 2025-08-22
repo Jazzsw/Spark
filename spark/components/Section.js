@@ -46,8 +46,6 @@ export default function Section({
     Array.from(scrollContainer).forEach(element => {
       element.addEventListener('wheel', (event) => {
           event.preventDefault(); // Prevent default vertical scrolling of the page
-
-        // Adjust scrollLeft based on the vertical scroll direction (deltaY)
         element.scrollLeft += event.deltaY;
       });
     });

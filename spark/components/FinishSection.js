@@ -36,7 +36,7 @@ export default function FinishSection({
             {type === "image" ? (
               <img src={post.imageUrl} alt="" className="cardImg" />
             ) : (
-              <div id="sec5" className={`cardText ${sectionId === 5 ? "finishText" : ""}`}>{post.text}</div>
+              <div id="sec5" className={`cardText ${sectionId === 5 ? "finishText" : ""} ${finishExclusionsMap[post.value].length > 0 ? "selectedFinishText" : ""}`}>{post.text}</div>
             )}
 
             <div className="cardInfoWrapper">
