@@ -313,6 +313,8 @@ const totalPrice =
           setActiveCards({});
           setLabourFee('');
           setConnection('Connection');
+          document.getElementById('section-4').style.display = "none";
+          document.getElementById('section-4-title').style.display = "none";
         }}>Reset</button>
       </div>
 
