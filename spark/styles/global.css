@@ -718,7 +718,7 @@ body{
     }
     .section {
         height: 18em;
-        width: 100%;
+        width: 103%;
         margin-left: 0px;
     }
     .section.textSection {
@@ -782,7 +782,7 @@ body{
     }
     .connectionButton{
         height: auto;
-        width: 10em;
+        width: 50%;
         display:flex;
         justify-content: center;
         align-items: center;
