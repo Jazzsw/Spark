@@ -718,7 +718,7 @@ body{
     }
     .section {
         height: 18em;
-        width: 24em;
+        width: 100%;
         margin-left: 0px;
     }
     .section.textSection {
