@@ -105,7 +105,7 @@ export default function Section({
 
 
         {hasCustom && (
-            <div className={`card ${activeCards[sectionId] === `custom${sectionId}` ? "active" : ""} ${type === "image" ? "imageCard" : "textCard"}`} key={`custom${sectionId}`}
+            <div className={`card ${activeCards[sectionId] === `custom${sectionId}` ? "active" : ""} ${type === "image" ? "imageCard" : "textCard"} ${'customPriceCard'}`} key={`custom${sectionId}`}
             onClick={() => handleCardClick(`custom${sectionId}`)}
             >
 

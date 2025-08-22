@@ -149,7 +149,7 @@ const totalPrice =
         <Section
         sectionId={1}
         title="Canopy"
-        posts={posts.filter((p) => p.section === 1)}
+        posts={posts.filter((p) => p.section === 1).sort((a, b) => b.description.localeCompare(a.description)).sort((a, b) => a.profileID.localeCompare(b.profileID))}
         activeCards={activeCards}
         setActiveCards={setActiveCards}
         CustomValue={CustomValue}
@@ -252,7 +252,7 @@ const totalPrice =
       <Section
         sectionId={4}
         title="Fitter Profile"
-        posts={posts.filter((p) => p.section === 4 && (!isAdmin ? sec4Array.includes(p.profileID) : true))}
+        posts={posts.filter((p) => p.section === 4 && (!isAdmin ? sec4Array.includes(p.profileID) : true)).sort((a, b) => a.description.localeCompare(b.description))}
         activeCards={activeCards}
         setActiveCards={setActiveCards}
         CustomValue={CustomValue}

@@ -627,6 +627,13 @@ body{
     margin-top: 0.5em;
 }
 
+.customPriceCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 18em;
+}
+
 .customInputBox{
     border: none;
     padding: 8px;
@@ -634,8 +641,8 @@ body{
     background-color: #2C2C2C;
     color: #fff;
     width: 17em;
+
     /* height: 10%; */
-    
 }
 .customInputBox:focus {
   outline: none;
