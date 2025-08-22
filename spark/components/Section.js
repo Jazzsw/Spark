@@ -41,7 +41,17 @@ export default function Section({
             document.getElementById('section-4-title').style.flexDirection = "column";
         }
     }
-};
+
+    const scrollContainer = document.getElementsByClassName('section');
+    Array.from(scrollContainer).forEach(element => {
+      element.addEventListener('wheel', (event) => {
+          event.preventDefault(); // Prevent default vertical scrolling of the page
+
+        // Adjust scrollLeft based on the vertical scroll direction (deltaY)
+        element.scrollLeft += event.deltaY;
+      });
+    });
+  }
 
   return (
     <>
