@@ -152,6 +152,7 @@ body{
 .cardDelete.finishDelete{
     top: 1.5em;
     height: 2.5em;
+
 }
 
 
@@ -292,7 +293,7 @@ body{
     padding: 8px 8px;
     border: none;
     z-index: 10;
-    border-radius: 0 8px 8px 0px;
+    border-radius: 0 0 8px 0;
     cursor: pointer;
     position: relative;
     left: -0.6em;
@@ -304,6 +305,7 @@ body{
 .editButton:hover {
     scale: 1.05;
     border: 1px dashed #e3e6e8;
+    border-radius: 0 8px 8px 0;
 }
 .editButton.textEditButton {
     left: -0.6em;
@@ -728,7 +730,22 @@ body{
         width: 50%;
     }
     .cardDelete{
-        top:1%;
+        top:0;
+        left: -1em;
+    }
+    .cardDelete.textDelete{
+        left: -1em;
+        top: 0em;
+        height: 2.5em;
+    }
+    .editButton{
+        top: 0;
+        left: -1em;
+    }
+    .editButton.textEditButton {
+        left: -1em;
+        top: 0em;
+        height: 2.5em;
     }
     .title{
         left: 8px;
