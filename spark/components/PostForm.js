@@ -148,10 +148,10 @@ export default function PostForm({ existing, onSave, addSection, setAddSection, 
   return (
     <>
     <form onSubmit={handleSubmit} className="addCard">
-      <h2>{existing?.id ? 'Update Card' : 'Create A Card'}</h2>
+      <h2 style={{fontFamily: 'Michroma, sans-serif', fontSize: '2em'}}>{existing?.id ? 'Update Card' : 'Create A Card'}</h2>
 
-      {!existing?.id && (<h2>What Would You like to Add?</h2>)}
-      
+      {!existing?.id && (<h2 style={{fontWeight: 100, fontSize: '1.2em'}}>What Would You like to Add?</h2>)}
+
       <div style={{display: 'flex'}}>
       <select className='selectOption' value={addSection} onChange={(e) => setAddSection(e.target.value)}>
         <option value=''>Select</option>
