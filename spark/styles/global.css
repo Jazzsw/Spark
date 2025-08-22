@@ -648,7 +648,8 @@ body{
 .connectionSelector {
     margin-bottom: 16px;
     display: flex;
-    margin-left : 1em;
+    margin-left: 1em;
+    margin-right: 1em;
     height: 8em;
 }
 

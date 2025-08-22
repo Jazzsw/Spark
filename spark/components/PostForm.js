@@ -345,8 +345,8 @@ export default function PostForm({ existing, onSave, addSection, setAddSection, 
         <>
           <div className='addSection'>
             <div className='addContainer'>
-              <h2 className='addText'>Add Finish</h2>
-              <div className='inputs' style={{ display: 'flex', flexDirection: 'row'}}>
+              <div className='inputs'>
+                <h2 className='addText'>Add Finish Info</h2>
                 <input className='inputBox' type="text" placeholder="Finish Name" value={text} onChange={(e) => setText(e.target.value)} />
                 <input className='inputBox' type="text" placeholder="Finish Shortform" value={val} onChange={(e) => setVal(e.target.value)} />
                 <input className='inputBox' type="text" placeholder="Finish Rod Price" value={description} onChange={(e) => setDescription(e.target.value)} />
