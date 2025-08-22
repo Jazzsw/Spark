@@ -119,7 +119,7 @@ const totalPrice =
     return acc;
   }, {});
 
-  console.log("finishMAP" + JSON.stringify(finishExclusionsMap));
+  // console.log("finishMAP" + JSON.stringify(finishExclusionsMap));
 
 
   return (
