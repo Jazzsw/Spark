@@ -944,7 +944,7 @@ body{
      }
      .toggleSingleDrop{
         display: flex;
-        right: 14.5em;
+        right: 17em;
         top: 2.5em;
         width: 2em;
         z-index: 1000;
