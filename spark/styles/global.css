@@ -394,6 +394,46 @@ body{
     color: #1c1917;
 }
 
+.toggleSinglesButton{
+    background-color: #1c1917;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    height: calc(1em + 8px);
+    display: flex;
+    position: absolute;
+    right: 22em;
+    top: 1.5em;
+}
+
+.toggleSingleDrop{
+    background-color: #1c1917;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    height: calc(1em + 8px);
+    display: flex;
+    position: absolute;
+    right: 12em;
+    top: 1.5em;
+    display: none;
+}
+
+
+.toggleSinglesText{
+    margin: auto 8px;
+    font-size: 1em;
+    font-weight: 100;
+}
+
+
+
 .toggleDetailsButton{
     background-color: #2C2C2C;
     color: #fff;
@@ -422,6 +462,7 @@ body{
     font-size: 1em;
     font-weight: lighter;
 }
+
 
 
 .toggleDetailsIcon{
@@ -783,6 +824,15 @@ body{
     background-color: #1c1917;
 }
 
+.singleSectionContainer{
+    margin-top: 5em;
+}
+
+.longTxt{
+    font-size: 1em;
+    padding: 1em;
+}
+
 
 
 @media only screen and (max-width: 600px) {
@@ -889,6 +939,15 @@ body{
     /* .card.textCard{
         width: 80vw;
     } */
+     .toggleSinglesButton{
+        display: none;
+     }
+     .toggleSingleDrop{
+        display: flex;
+        right: 16.5em;
+        top: 2.5em;
+        width: 2em;
+     }
     
 }
 

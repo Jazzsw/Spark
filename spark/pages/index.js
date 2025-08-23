@@ -14,6 +14,7 @@ export default function Home() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [detailsView, setDetailsView] = useState(false);
   const [loginView, setLoginView] = useState(false);
+  const [showSingleSection, setShowSingleSection] = useState(false);
 
   useEffect(() => {
     return onAuthStateChanged(auth, (user) => {
@@ -44,21 +45,21 @@ export default function Home() {
   const toggleDetails = () => {
     setDetailsView(!detailsView);
     document.querySelectorAll('.cardInfoWrapper')
-    .forEach(element => {
-    // element.style.display = detailsView ? 'none' : 'flex';
-    element.style.height = detailsView ? '0px' : '2em';
-    });
+      .forEach(element => {
+        // element.style.display = detailsView ? 'none' : 'flex';
+        element.style.height = detailsView ? '0px' : '2em';
+      });
 
     document.querySelectorAll('.cardImg')
-    .forEach(element => {
-      element.style.height = detailsView ? '15em' : '13em';
-    });
+      .forEach(element => {
+        element.style.height = detailsView ? '15em' : '13em';
+      });
 
     document.querySelectorAll('.cardText').forEach(element => {
       element.style.fontSize = detailsView ? '' : '1.8em';
       element.style.height = detailsView ? '' : '1.3em';
     });
-    document.querySelectorAll('.cardText.finishText').forEach(element => {  
+    document.querySelectorAll('.cardText.finishText').forEach(element => {
       element.style.fontSize = detailsView ? '' : '1.2em';
       element.style.textAlign = detailsView ? '' : 'none';
       element.style.height = detailsView ? '' : '1.5em';
@@ -85,33 +86,46 @@ export default function Home() {
     });
   };
 
+  const handleDropdownChange = (e) => {
+   if (e.target.value != 'v') {
+      setShowSingleSection(!showSingleSection);
+   } 
+   e.target.value = 'v';
+  };
+
 
   return (
     <div style={{ padding: 24, maxWidth: 1100, margin: '0 auto' }}>
       <div className="header"></div>
       <header style={{ display: 'flex', justifyContent: 'end', alignItems: 'center', marginBottom: 24 }}>
-       <h1 className='title'>Lumen</h1>
+        <h1 className='title'>Lumen</h1>
+        <div className='toggleSinglesButton' onClick={() => { setShowSingleSection(!showSingleSection) }}><h2 className='toggleSinglesText'>{showSingleSection ? 'Hide Singles' : 'Show Singles'}</h2></div>
+        <select id="singlesDrop" className='toggleSingleDrop' onChange={handleDropdownChange}>
+          <option value="showSingles">v</option>
+          <option value="hideSingles" onClick={() => { setShowSingleSection(!showSingleSection) }}>{showSingleSection ? 'Hide Singles' : 'Show Singles'}</option>
+        </select>
+
         <div style={{ display: 'flex', gap: 8 }}>
-          <div className="toggleDetailsButton" onClick={() => toggleDetails()}> 
-          <h2 className='shDetails'> { detailsView ? 'Hide Details' : 'Show Details' } </h2>
-          <img src={detailsView ? 'https://i.imgur.com/dexYLQq.png' : 'https://i.imgur.com/a6Zrbuw.png'} className='toggleDetailsIcon' alt="Toggle Details" />
+          <div className="toggleDetailsButton" onClick={() => toggleDetails()}>
+            <h2 className='shDetails'> {detailsView ? 'Hide Details' : 'Show Details'} </h2>
+            <img src={detailsView ? 'https://i.imgur.com/dexYLQq.png' : 'https://i.imgur.com/a6Zrbuw.png'} className='toggleDetailsIcon' alt="Toggle Details" />
           </div>
 
-         {!isAdmin && (
-          <>
-          <div className='loginContainer'>
-            <button className="adminLoginButton" style= {loginView ? {border: '1px solid #ff4d4d', backgroundColor: '#1E1E1E'} : {}} onClick={() => setLoginView(!loginView)}>{loginView ? 'Cancel' : 'Login To Edit'}</button>
-              {loginView && (
-                <>
-                  <div className='loginBlock'>
-                    <h2 className='adminLoginText'>Admin Login</h2>
-                    <input id='emailBox' className='loginInput' type="email" placeholder="Email" />
-                    <input id='passwordBox' className='loginInput' type="password" placeholder="Password" onClick={() => listenForEnter()}/>
-                    <button className='loginButton' onClick={handleLogin}>Login</button>
-                  </div>
-                </>
-              )}
-            </div>
+          {!isAdmin && (
+            <>
+              <div className='loginContainer'>
+                <button className="adminLoginButton" style={loginView ? { border: '1px solid #ff4d4d', backgroundColor: '#1E1E1E' } : {}} onClick={() => setLoginView(!loginView)}>{loginView ? 'Cancel' : 'Login To Edit'}</button>
+                {loginView && (
+                  <>
+                    <div className='loginBlock'>
+                      <h2 className='adminLoginText'>Admin Login</h2>
+                      <input id='emailBox' className='loginInput' type="email" placeholder="Email" />
+                      <input id='passwordBox' className='loginInput' type="password" placeholder="Password" onClick={() => listenForEnter()} />
+                      <button className='loginButton' onClick={handleLogin}>Login</button>
+                    </div>
+                  </>
+                )}
+              </div>
             </>
           )}
 
@@ -131,7 +145,9 @@ export default function Home() {
       )}
 
       <Board
+        showSingleSection={showSingleSection}
         onEdit={(post) => {
+
           if (!isAdmin) return alert('Admin only');
           setEditing(post);
           setShowForm(true);

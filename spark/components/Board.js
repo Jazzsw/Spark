@@ -8,8 +8,9 @@ import Section from "../components/Section";
 import ChainSection from "../components/ChainSection";
 import FinishSection from "../components/FinishSection";
 import ProgressBar from '../components/ProgressBar';
+import Singles from '../components/Singles';
 
-export default function Board() {
+export default function Board({ showSingleSection }) {
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -23,6 +24,7 @@ export default function Board() {
   const [finishesArray, setFinishesArray] = useState([]);
 
   const [addSection, setAddSection] = useState('');
+  // const [showSingleSection, setShowSingleSection] = useState(true);
 
 
 
@@ -63,29 +65,29 @@ export default function Board() {
   };
 
   const getPrice = (post, section) => {
-  if (!post) return 0;
-  if (connection === "Rod") {
-    return parseFloat(post.description) || 0;
-  } else if (connection === "Chain") {
-    return parseFloat(post.chainDescription) || 0;
-  }
-  return 0;
-};
+    if (!post) return 0;
+    if (connection === "Rod") {
+      return parseFloat(post.description) || 0;
+    } else if (connection === "Chain") {
+      return parseFloat(post.chainDescription) || 0;
+    }
+    return 0;
+    };
 
-const totalPrice =
-  getPrice(posts.find(post => post.section === 1 && activeCards[1] === post.id), 1) +
-  getPrice(posts.find(post => post.section === 2 && activeCards[2] === post.id), 2) +
-  getPrice(posts.find(post => post.section === 3 && activeCards[3] === post.id), 3) +
-  getPrice(posts.find(post => post.section === 4 && activeCards[4] === post.id), 4) +
-  getPrice(posts.find(post => post.section === 5 && activeCards[5] === post.id), 5) +
-  (parseFloat(labourFee) || 0) +
-  (activeCards[1] === 'custom1' ? (parseFloat(CustomValue[1]) || 0) : 0) +
-  (activeCards[2] === 'custom2' ? (parseFloat(CustomValue[2]) || 0) : 0) +
-  (activeCards[3] === 'custom3' ? (parseFloat(CustomValue[3]) || 0) : 0) +
-  (activeCards[4] === 'custom4' ? (parseFloat(CustomValue[4]) || 0) : 0) +
-  (activeCards[5] === 'custom5' ? (parseFloat(CustomValue[5]) || 0) : 0) +
-  (activeCards[6] === 'customBrass2' ? (activeCards[7] ? (parseFloat(CustomValue[7]) || 0) : 0) : 0)+
-  (connection === 'Chain' ? parseFloat('50') || 0 : connection === 'Rod' ? parseFloat('75') || 0 : 0);
+  const totalPrice =
+    getPrice(posts.find(post => post.section === 1 && activeCards[1] === post.id), 1) +
+    getPrice(posts.find(post => post.section === 2 && activeCards[2] === post.id), 2) +
+    getPrice(posts.find(post => post.section === 3 && activeCards[3] === post.id), 3) +
+    getPrice(posts.find(post => post.section === 4 && activeCards[4] === post.id), 4) +
+    getPrice(posts.find(post => post.section === 5 && activeCards[5] === post.id), 5) +
+    (parseFloat(labourFee) || 0) +
+    (activeCards[1] === 'custom1' ? (parseFloat(CustomValue[1]) || 0) : 0) +
+    (activeCards[2] === 'custom2' ? (parseFloat(CustomValue[2]) || 0) : 0) +
+    (activeCards[3] === 'custom3' ? (parseFloat(CustomValue[3]) || 0) : 0) +
+    (activeCards[4] === 'custom4' ? (parseFloat(CustomValue[4]) || 0) : 0) +
+    (activeCards[5] === 'custom5' ? (parseFloat(CustomValue[5]) || 0) : 0) +
+    (activeCards[6] === 'customBrass2' ? (activeCards[7] ? (parseFloat(CustomValue[7]) || 0) : 0) : 0) +
+    (connection === 'Chain' ? parseFloat('50') || 0 : connection === 'Rod' ? parseFloat('75') || 0 : 0);
 
   // const selectedFinishes = Array.from(new Set(
   // Object.entries(activeCards)
@@ -125,236 +127,238 @@ const totalPrice =
 
   return (
     <>
-      {/* <ProgressBar
-        id='mobileProgressBar'
-        activeCards={activeCards}
-        connection={connection}
-      /> */}
+      {showSingleSection && (
+        <>
+        <Singles />
+        </>
+      )}
 
-    <div id="boardContainer" className='boardContainer'>
+      {!showSingleSection && (
+        <div id="boardContainer" className='boardContainer'>
 
-        {isAdmin && (
-          <PostForm
-            addSection={addSection}
+          {isAdmin && (
+            <PostForm
+              addSection={addSection}
+              setAddSection={setAddSection}
+              existing={selectedPost}
+              row3={posts.filter((p) => p.section === 3)}
+              finishes={posts.filter((p) => p.section === 5)}
+              onSave={() => {
+                setSelectedPost(null);
+                fetchPosts();
+              }}
+            />
+          )}
+
+          <h2 className='sectionTitle' style={{ display: isAdmin ? "" : "flex" }}>Connection Type</h2>
+          <div className='connectionSelector'>
+            <div className={`connectionButton ${connection === 'Rod' ? 'active' : ''}`} onClick={() => connection === 'Rod' ? setConnection('Connection') : setConnection('Rod')}><h2 className='connectionLabel'>Rod</h2></div>
+            <div className={`connectionButton ${connection === 'Chain' ? 'active' : ''}`} onClick={() => connection === 'Chain' ? setConnection('Connection') : setConnection('Chain')}><h2 className='connectionLabel'>Chain</h2></div>
+          </div>
+
+          <Section
+            sectionId={1}
+            title="Canopy"
+            posts={posts.filter((p) => p.section === 1).sort((a, b) => b.description.localeCompare(a.description)).sort((a, b) => a.profileID.localeCompare(b.profileID))}
+            activeCards={activeCards}
+            setActiveCards={setActiveCards}
+            CustomValue={CustomValue}
+            setCustomValue={setCustomValue}
+            isAdmin={isAdmin}
+            onDelete={handleDelete}
+            onEdit={(post) => setSelectedPost(post)}
+            onLinkClick={handleLinkClick}
+            type="image"
+            hasCustom={true}
+            connection={connection}
+            showFitter={showFitter}
+            setShowFitter={setShowFitter}
+            setSec4Array={setSec4Array}
             setAddSection={setAddSection}
-            existing={selectedPost}
-            row3={posts.filter((p) => p.section === 3)}
-            finishes={posts.filter((p) => p.section === 5)}
-            onSave={() => {
-              setSelectedPost(null);
-              fetchPosts();
-            }}
           />
-        )}
 
-        <h2 className='sectionTitle' style={{ display: isAdmin ? "" : "flex" }}>Connection Type</h2>
-        <div className='connectionSelector'>  
-          <div className={`connectionButton ${connection === 'Rod' ? 'active' : ''}`} onClick={() => connection==='Rod' ? setConnection('Connection') : setConnection('Rod')}><h2 className='connectionLabel'>Rod</h2></div>
-          <div className={`connectionButton ${connection === 'Chain' ? 'active' : ''}`} onClick={() => connection==='Chain' ? setConnection('Connection') : setConnection('Chain')}><h2 className='connectionLabel'>Chain</h2></div>
+          {connection === 'Chain' && (
+            <ChainSection
+              sectionId={6}
+              title={'Chain Type'}
+              activeCards={activeCards}
+              setActiveCards={setActiveCards}
+              CustomValue={CustomValue}
+              setCustomValue={setCustomValue}
+              isAdmin={isAdmin}
+              onDelete={handleDelete}
+              onEdit={(post) => setSelectedPost(post)}
+              onLinkClick={handleLinkClick}
+              type="text"
+              hasCustom={true}
+              handleCardClick={handleCardClick}
+            />
+          )}
+
+          {(activeCards[6] === 'customBrass1' || connection === 'Rod' || connection === 'Connection') && (
+            <Section
+              sectionId={2}
+              title={`${connection} Length ${connection === 'Rod' ? '(All rod is 3/4" dia)' : connection === 'Chain' ? '(Chain is 7 Gauge (3/16" thick) Elongated links (1" x 2-1/4")' : ''}`}
+              posts={posts.filter((p) => p.section === 2).sort((a, b) => a.text.localeCompare(b.text))}
+              activeCards={activeCards}
+              setActiveCards={setActiveCards}
+              CustomValue={CustomValue}
+              setCustomValue={setCustomValue}
+              isAdmin={isAdmin}
+              onDelete={handleDelete}
+              onEdit={(post) => setSelectedPost(post)}
+              onLinkClick={handleLinkClick}
+              type="text"
+              hasCustom={true}
+              connection={connection}
+              showFitter={showFitter}
+              setShowFitter={setShowFitter}
+              setSec4Array={setSec4Array}
+              setAddSection={setAddSection}
+            />
+          )}
+
+          {activeCards[6] === 'customBrass2' && (
+            <ChainSection
+              sectionId={7}
+              title={'Chain Finish (All Solid Brass Chains are 1/4" dia. 0-3\' length)'}
+              activeCards={activeCards}
+              setActiveCards={setActiveCards}
+              CustomValue={CustomValue}
+              setCustomValue={setCustomValue}
+              isAdmin={isAdmin}
+              onDelete={handleDelete}
+              onEdit={(post) => setSelectedPost(post)}
+              onLinkClick={handleLinkClick}
+              type="text"
+              hasCustom={true}
+              handleCardClick={handleCardClick}
+            />
+
+          )}
+
+
+          <Section
+            sectionId={3}
+            title="Fitter Size"
+            posts={posts.filter((p) => p.section === 3).sort((a, b) => a.text.localeCompare(b.text))}
+            activeCards={activeCards}
+            setActiveCards={setActiveCards}
+            CustomValue={CustomValue}
+            setCustomValue={setCustomValue}
+            isAdmin={isAdmin}
+            onDelete={handleDelete}
+            onEdit={(post) => setSelectedPost(post)}
+            onLinkClick={handleLinkClick}
+            type="text"
+            hasCustom={true}
+            connection={connection}
+            showFitter={showFitter}
+            setShowFitter={setShowFitter}
+            setSec4Array={setSec4Array}
+            setAddSection={setAddSection}
+          />
+
+          <Section
+            sectionId={4}
+            title="Fitter Profile"
+            posts={posts.filter((p) => p.section === 4 && (!isAdmin ? sec4Array.includes(p.profileID) : true)).sort((a, b) => a.description.localeCompare(b.description))}
+            activeCards={activeCards}
+            setActiveCards={setActiveCards}
+            CustomValue={CustomValue}
+            setCustomValue={setCustomValue}
+            isAdmin={isAdmin}
+            onDelete={handleDelete}
+            onEdit={(post) => setSelectedPost(post)}
+            onLinkClick={handleLinkClick}
+            type="image"
+            hasCustom={true}
+            connection={connection}
+            showFitter={showFitter}
+            setShowFitter={setShowFitter}
+            setSec4Array={setSec4Array}
+            setAddSection={setAddSection}
+          />
+
+          {!(activeCards[6] === 'customBrass2') && (
+            <FinishSection
+              sectionId={5}
+              title="Finish"
+              posts={posts.filter((p) => p.section === 5).sort((a, b) => a.description.localeCompare(b.description))}
+              activeCards={activeCards}
+              setActiveCards={setActiveCards}
+              CustomValue={CustomValue}
+              setCustomValue={setCustomValue}
+              isAdmin={isAdmin}
+              onDelete={handleDelete}
+              onEdit={(post) => setSelectedPost(post)}
+              onLinkClick={handleLinkClick}
+              type="Text"
+              hasCustom={true}
+              connection={connection}
+              showFitter={showFitter}
+              setShowFitter={setShowFitter}
+              setSec4Array={setSec4Array}
+              setAddSection={setAddSection}
+              // selectedFinishes={selectedFinishes}
+              finishExclusionsMap={finishExclusionsMap}
+
+              handleCardClick={handleCardClick}
+            />
+          )}
+
+          {!isAdmin && (
+            <>
+              <div className='labourFeeContainer'>
+                <h2 className='labourFeeTitle'>Additional Fees</h2>
+                <input type="text" placeholder="$" className='inputFee' id='labourFee' value={labourFee}
+                  onChange={(e) => setLabourFee(e.target.value)} />
+              </div>
+
+              <div className='stickyFooterShadow'></div>
+
+
+              <div className='stickyFooter'>
+                <ProgressBar
+                  id='mobileProgressBar'
+                  activeCards={activeCards}
+                  connection={connection}
+                />
+
+                <div className='footerFlex'>
+                  <div className='resetContainer'>
+                    <button className='resetButton' onClick={() => {
+                      setActiveCards({});
+                      setLabourFee('');
+                      setConnection('Connection');
+                      document.getElementById('section-4').style.display = "none";
+                      document.getElementById('section-4-title').style.display = "none";
+                    }}>Reset</button>
+                  </div>
+
+                  <ProgressBar
+                    id='desktopProgressBar'
+                    activeCards={activeCards}
+                    connection={connection}
+                  />
+
+                  <div>
+                    <div className='totalContainer'>
+                      <p className='totalTitle'>Total </p>
+                      <h1 className='totalPrice' id='totalPrice'>${totalPrice.toFixed(2)}
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </>
+          )}
         </div>
-      
-        <Section
-        sectionId={1}
-        title="Canopy"
-        posts={posts.filter((p) => p.section === 1).sort((a, b) => b.description.localeCompare(a.description)).sort((a, b) => a.profileID.localeCompare(b.profileID))}
-        activeCards={activeCards}
-        setActiveCards={setActiveCards}
-        CustomValue={CustomValue}
-        setCustomValue={setCustomValue}
-        isAdmin={isAdmin}
-        onDelete={handleDelete}
-        onEdit={(post) => setSelectedPost(post)}
-        onLinkClick={handleLinkClick}
-        type="image"
-        hasCustom={true}
-        connection={connection}
-        showFitter={showFitter}
-        setShowFitter={setShowFitter}
-        setSec4Array={setSec4Array}
-        setAddSection={setAddSection}
-      />
-
-      {connection === 'Chain' && (
-        <ChainSection
-          sectionId={6}
-          title={'Chain Type'}
-          activeCards={activeCards}
-          setActiveCards={setActiveCards}
-          CustomValue={CustomValue}
-          setCustomValue={setCustomValue}
-          isAdmin={isAdmin}
-          onDelete={handleDelete}
-          onEdit={(post) => setSelectedPost(post)}
-          onLinkClick={handleLinkClick}
-          type="text"
-          hasCustom={true}
-          handleCardClick={handleCardClick}
-        />
       )}
 
-      {(activeCards[6] === 'customBrass1' || connection === 'Rod' || connection === 'Connection') && (
-        <Section
-          sectionId={2}
-          title={`${connection} Length ${connection === 'Rod' ? '(All rod is 3/4" dia)' : connection === 'Chain' ? '(Chain is 7 Gauge (3/16" thick) Elongated links (1" x 2-1/4")' : ''}`}
-          posts={posts.filter((p) => p.section === 2).sort((a, b) => a.text.localeCompare(b.text))}
-          activeCards={activeCards}
-          setActiveCards={setActiveCards}
-          CustomValue={CustomValue}
-          setCustomValue={setCustomValue}
-          isAdmin={isAdmin}
-          onDelete={handleDelete}
-          onEdit={(post) => setSelectedPost(post)}
-          onLinkClick={handleLinkClick}
-          type="text"
-          hasCustom={true}
-          connection={connection}
-          showFitter={showFitter}
-          setShowFitter={setShowFitter}
-          setSec4Array={setSec4Array}
-          setAddSection={setAddSection}
-        />
-      )}
-
-      {activeCards[6] === 'customBrass2' && (
-         <ChainSection
-          sectionId={7}
-          title={'Chain Finish (All Solid Brass Chains are 1/4" dia. 0-3\' length)'}
-          activeCards={activeCards}
-          setActiveCards={setActiveCards}
-          CustomValue={CustomValue}
-          setCustomValue={setCustomValue}
-          isAdmin={isAdmin}
-          onDelete={handleDelete}
-          onEdit={(post) => setSelectedPost(post)}
-          onLinkClick={handleLinkClick}
-          type="text"
-          hasCustom={true}
-          handleCardClick={handleCardClick}
-        />
-
-      )}
-      
-      
-      <Section
-        sectionId={3}
-        title="Fitter Size"
-        posts={posts.filter((p) => p.section === 3).sort((a, b) => a.text.localeCompare(b.text))}
-        activeCards={activeCards}
-        setActiveCards={setActiveCards}
-        CustomValue={CustomValue}
-        setCustomValue={setCustomValue}
-        isAdmin={isAdmin}
-        onDelete={handleDelete}
-        onEdit={(post) => setSelectedPost(post)}
-        onLinkClick={handleLinkClick}
-        type="text"
-        hasCustom={true}
-        connection={connection}
-        showFitter={showFitter}
-        setShowFitter={setShowFitter}
-        setSec4Array={setSec4Array}
-        setAddSection={setAddSection}
-      />
-
-      <Section
-        sectionId={4}
-        title="Fitter Profile"
-        posts={posts.filter((p) => p.section === 4 && (!isAdmin ? sec4Array.includes(p.profileID) : true)).sort((a, b) => a.description.localeCompare(b.description))}
-        activeCards={activeCards}
-        setActiveCards={setActiveCards}
-        CustomValue={CustomValue}
-        setCustomValue={setCustomValue}
-        isAdmin={isAdmin}
-        onDelete={handleDelete}
-        onEdit={(post) => setSelectedPost(post)}
-        onLinkClick={handleLinkClick}
-        type="image"
-        hasCustom={true}
-        connection={connection}
-        showFitter={showFitter}
-        setShowFitter={setShowFitter}
-        setSec4Array={setSec4Array}
-        setAddSection={setAddSection}
-      />
-
-      {!(activeCards[6] === 'customBrass2') && (
-      <FinishSection
-        sectionId={5}
-        title="Finish"
-        posts={posts.filter((p) => p.section === 5).sort((a, b) => a.description.localeCompare(b.description))}
-        activeCards={activeCards}
-        setActiveCards={setActiveCards}
-        CustomValue={CustomValue}
-        setCustomValue={setCustomValue}
-        isAdmin={isAdmin}
-        onDelete={handleDelete}
-        onEdit={(post) => setSelectedPost(post)}
-        onLinkClick={handleLinkClick}
-        type="Text"
-        hasCustom={true}
-        connection={connection}
-        showFitter={showFitter}
-        setShowFitter={setShowFitter}
-        setSec4Array={setSec4Array}
-        setAddSection={setAddSection}
-        // selectedFinishes={selectedFinishes}
-        finishExclusionsMap={finishExclusionsMap}
-
-        handleCardClick={handleCardClick}
-      />
-      )}
-      
-    { !isAdmin && (
-      <>
-      <div className='labourFeeContainer'>
-        <h2 className='labourFeeTitle'>Additional Fees</h2>
-        <input type="text" placeholder="$" className='inputFee' id='labourFee' value={labourFee}
-          onChange={(e) => setLabourFee(e.target.value)} />
-      </div>
-
-    <div className='stickyFooterShadow'></div>
-
-
-    <div className='stickyFooter'>
-      <ProgressBar
-        id='mobileProgressBar'
-        activeCards={activeCards}
-        connection={connection}
-      />
-
-      <div className='footerFlex'>
-      <div className='resetContainer'>
-        <button className='resetButton' onClick={() => {
-          setActiveCards({});
-          setLabourFee('');
-          setConnection('Connection');
-          document.getElementById('section-4').style.display = "none";
-          document.getElementById('section-4-title').style.display = "none";
-        }}>Reset</button>
-      </div>
-      
-      <ProgressBar 
-        id='desktopProgressBar'
-        activeCards={activeCards}
-        connection={connection}
-      />
-      
-      <div>
-        <div className='totalContainer'>
-          <p className='totalTitle'>Total </p>
-          <h1 className='totalPrice' id='totalPrice'>${totalPrice.toFixed(2)}
-          </h1>
-        </div>
-      </div>
-      </div>
-      
-    </div>
+      );
     </>
-    )}
+  );
 
-    </div>
-    
-  );
-  </> 
-  );
 }
