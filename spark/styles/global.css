@@ -841,7 +841,7 @@ body{
     }
     .section {
         height: 18em;
-        width: 98%;
+        width: 97%;
         margin-left: 0px;
     }
     .section.textSection {
@@ -944,7 +944,7 @@ body{
      }
      .toggleSingleDrop{
         display: flex;
-        right: 12em;
+        right: 13.5em;
         top: 2.5em;
         width: 2em;
      }
