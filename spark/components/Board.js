@@ -7,6 +7,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Section from "../components/Section";
 import ChainSection from "../components/ChainSection";
 import FinishSection from "../components/FinishSection";
+import ProgressBar from '../components/ProgressBar';
 
 export default function Board() {
   const [posts, setPosts] = useState([]);
@@ -123,8 +124,14 @@ const totalPrice =
 
 
   return (
-    
-    <div className='boardContainer'>
+    <>
+      {/* <ProgressBar
+        id='mobileProgressBar'
+        activeCards={activeCards}
+        connection={connection}
+      /> */}
+
+    <div id="boardContainer" className='boardContainer'>
 
         {isAdmin && (
           <PostForm
@@ -307,7 +314,15 @@ const totalPrice =
 
     <div className='stickyFooterShadow'></div>
 
+
     <div className='stickyFooter'>
+      <ProgressBar
+        id='mobileProgressBar'
+        activeCards={activeCards}
+        connection={connection}
+      />
+
+      <div className='footerFlex'>
       <div className='resetContainer'>
         <button className='resetButton' onClick={() => {
           setActiveCards({});
@@ -317,13 +332,20 @@ const totalPrice =
           document.getElementById('section-4-title').style.display = "none";
         }}>Reset</button>
       </div>
-
+      
+      <ProgressBar 
+        id='desktopProgressBar'
+        activeCards={activeCards}
+        connection={connection}
+      />
+      
       <div>
         <div className='totalContainer'>
           <p className='totalTitle'>Total </p>
           <h1 className='totalPrice' id='totalPrice'>${totalPrice.toFixed(2)}
           </h1>
         </div>
+      </div>
       </div>
       
     </div>
@@ -332,5 +354,7 @@ const totalPrice =
 
     </div>
     
+  );
+  </> 
   );
 }

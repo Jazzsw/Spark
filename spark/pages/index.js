@@ -14,8 +14,6 @@ export default function Home() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [detailsView, setDetailsView] = useState(false);
   const [loginView, setLoginView] = useState(false);
-  
-
 
   useEffect(() => {
     return onAuthStateChanged(auth, (user) => {

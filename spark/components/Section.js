@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export default function Section({
   sectionId,
   title,
@@ -18,6 +20,9 @@ export default function Section({
     setSec4Array,
     setAddSection,
 }) {
+  const [scrollMode, setScrollMode] = useState("unknown");
+
+
   const handleCardClick = (postId) => {
     const isCurrentlyActive = activeCards[sectionId] === postId;
     const newActive = isCurrentlyActive ? null : postId;
@@ -32,6 +37,9 @@ export default function Section({
             setShowFitter(false);
             document.getElementById('section-4').style.display = "none";
             document.getElementById('section-4-title').style.display = "none";
+            Array.from(document.getElementsByClassName('sec4Btns')).forEach(element => {
+              element.style.display = "none";
+            });
         } else {
             const selectedPost = posts.find(post => post.id === postId);
             setSec4Array(selectedPost?.children || []);
@@ -39,21 +47,46 @@ export default function Section({
             document.getElementById('section-4').style.display = "flex";
             document.getElementById('section-4-title').style.display = "flex";
             document.getElementById('section-4-title').style.flexDirection = "column";
+            Array.from(document.getElementsByClassName('sec4Btns')).forEach(element => {
+              element.style.display = "";
+            });
         }
     }
 
-    const scrollContainer = document.getElementsByClassName('section');
-    Array.from(scrollContainer).forEach(element => {
-      element.addEventListener('wheel', (event) => {
-          event.preventDefault(); // Prevent default vertical scrolling of the page
-        element.scrollLeft += event.deltaY;
-      });
-    });
+    // window.addEventListener("wheel", (e) => {
+    //   setScrollMode(Math.abs(e.deltaY) < 15 ? "trackpad" : "mouse");
+    // });
+
+    // window.addEventListener("touchstart", () => {
+    //   setScrollMode("touch");
+    // });
+
+    // const scrollContainer = document.getElementsByClassName('section');
+    // {scrollMode === "trackpad" || scrollMode === "touch" ? Array.from(scrollContainer).forEach(element => {
+    //   element.removeEventListener('wheel', (event) => {
+    //       event.preventDefault();
+    //     element.scrollLeft += event.deltaY;
+    //   });
+    // }) : null
+    // }
+    // Array.from(scrollContainer).forEach(element => {
+    //   element.addEventListener('wheel', (event) => {
+    //       event.preventDefault();
+    //     element.scrollLeft += event.deltaY;
+    //   });
+    // });
+
   }
 
   return (
     <>
       <h2 id={`section-${sectionId}-title`} className={`sectionTitle ${showFitter ? "fitterTitle" : ""}`} style={{ display: isAdmin ? "flex" : "" }}>{title}</h2>
+      <div className='scrollButtonContainer'>
+
+      <button className={`scrollLeftButton ${sectionId === 4 ? "sec4Btns" : ""}`} onClick={() => {
+        document.getElementById(`section-${sectionId}`).scrollBy({ left: -300, behavior: 'smooth' });
+      }}>‹</button>
+
       <div id={`section-${sectionId}`} className={`section ${type === "image" ? "imageSection" : "textSection"} ${showFitter ? "fitterSection" : ""}`} style={{ display: isAdmin ? "flex" : "" }}>
         {posts.map((post) => (
           <div
@@ -129,6 +162,11 @@ export default function Section({
             />
             </div>
         )}
+      </div>
+
+      <button className={`scrollRightButton ${sectionId === 4 ? "sec4Btns" : ""}`} onClick={() => {
+        document.getElementById(`section-${sectionId}`).scrollBy({ left: 300, behavior: 'smooth' });
+        }}>›</button>
       </div>
     </>
   );

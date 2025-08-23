@@ -25,8 +25,12 @@ export default function FinishSection({
     return(
         <>
         <h2 id={`section-${sectionId}-title`} className={`sectionTitle ${showFitter ? "fitterTitle" : ""}`} style={{ display: isAdmin ? "flex" : "" }}>{title}</h2>
+      <div className='scrollButtonContainer'>
+        <button className={`scrollLeftButton ${sectionId === 4 ? "sec4Btns" : ""}`} onClick={() => {
+        document.getElementById(`section-${sectionId}`).scrollBy({ left: -300, behavior: 'smooth' });
+        }}>‹</button>
+
         <div id={`section-${sectionId}`} className={`section ${type === "image" ? "imageSection" : "textSection"} ${showFitter ? "fitterSection" : ""}`} style={{ display: isAdmin ? "flex" : "" }}>
-        
         {posts.map((post) => ( 
           <div
             key={post.id}
@@ -100,6 +104,11 @@ export default function FinishSection({
             />
             </div>
         )}
+      </div>
+
+      <button className={`scrollRightButton ${sectionId === 4 ? "sec4Btns" : ""}`} onClick={() => {
+        document.getElementById(`section-${sectionId}`).scrollBy({ left: 300, behavior: 'smooth' });
+        }}>›</button>
       </div>
     </>
   );
